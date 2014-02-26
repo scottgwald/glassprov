@@ -16,7 +16,46 @@
 
     <!-- Custom styles for this template -->
     <link href="css/css.css" rel="stylesheet">
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript">
+    var counter = 0;
 
+    (function () {
+      function contentLoaded () {
+
+        window.addEventListener('keyup', function (e) {
+          if (e.keyCode === 38) { // up arrow
+            // if(document.activeElement.value!=undefined){
+            //   document.activeElement.blur();
+            // }
+
+          }}, false);
+
+
+        window.addEventListener('keyup', function (e) {
+          if (e.keyCode === 37) { // left arrow
+            if(document.activeElement.value==undefined){
+              var left = document.getElementById('l');
+              left.click();              
+            }
+          }}, false);
+
+        window.addEventListener('keyup', function (e) {
+          if (e.keyCode === 39) { // right arrow
+            if(document.activeElement.value==undefined){
+              var right = document.getElementById('r');
+              right.click();
+            }
+          }}, false);
+        
+        window.addEventListener('keyup', function (e) {
+          if (e.keyCode === 13) { // enter key
+            processInput();
+          }}, false);
+        }
+        window.addEventListener('DOMContentLoaded', contentLoaded, false); 
+    }());
+    </script>
   </head>
 
   <body>
@@ -42,17 +81,116 @@
       </div>
     </div>
 
-    <div class="container">
-
-      <div class="starter-template">
-        <h1>Submit Idea!</h1>
-          <form class="form" role="form">
-            <input type="text" class="form-control" placeholder="Your idea!" required autofocus>
-            <button class="btn btn-small btn-primary" type="submit">Submit</button>
-          </form>
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div id="1" class="item active">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:10px;">Idea 1</h1> 
+              <div class="form-container">
+                <div class="form">
+                  <input id="i1" type="text" class="form-control txt" placeholder="Your idea!" onfocus="this.hasFocus=true" onblur="this.hasFocus=false"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="2" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:10px;">Idea 2</h1> 
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="3" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:10px;">Idea 3</h1> 
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="4" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:10px;">Idea 4</h1> 
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="5" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:10px;">Idea 5</h1> 
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="6" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:10px;">Idea 6</h1> 
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <div id="7" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:10px;">Idea 7</h1> 
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <a id="l" onmouseover="if(counter<0){counter+=7;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter<0){counter+=7;}document.getElementsByClassName('txt')[counter].focus();"onclick="counter-=1;" class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a id="r" onmouseover="if(counter>6){counter=counter-7;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter>6){counter=counter-7;}document.getElementsByClassName('txt')[counter].focus();" onclick="counter+=1;" class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
 
-    </div><!-- /.container -->
 
 
     <!-- Bootstrap core JavaScript
