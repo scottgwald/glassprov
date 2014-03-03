@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>Custom Webapp WS endpoint</title>
+	<script type="text/javascript" src="msgpack.js"></script>
+	<script type="text/javascript" src="wearscript-client.js"></script>
+	<script type="text/javascript" src="reconnecting-websocket.js"></script>
+	<script type="text/javascript" src="jquery-1.11.0.min.js"></script>
+</head>
+<body>
+<h1><div id="theDiv">Waiting for WearScript</div></h1>
+<img id="theImage"><img>
+
+<script type="text/javascript">
+	server = "wss://api.picar.us/wearscriptdev/ws";
+	//server = 'ws://api.picar.us/wearscriptdev/ws';
+	Socket = new ReconnectingWebSocket(server);
+	console.log("Made the socket.");
+	ws = myWearScriptConnectionFactory(Socket, function (connected) {
+		//$.ready(function() {
+			$('#theDiv').html("WearScript Connected.");
+			$('#theImage').attr('src', 'cute-little-cat.jpg');
+			$('#theImage').attr('width', 1000);
+			console.log('Connected: ' + connected);
+		//});
+  	});
+
+  	ws.subscribe('rotation', rotate_cb);
+  	function rotate_cb(channel, message) {
+  		angle = -parseFloat(message);
+  		console.log("channel: " + channel +" message: " + message);
+  		$('body').css('transform', 'rotateZ(' + angle + 'deg)');
+  	}
+
+	function myWearScriptConnectionFactory(websocket, glassConnectedCallback) {
+	    function onopen(event) {
+	        console.log('opened');
+		ws.subscribe('subscriptions', subscription_cb);
+	        ws.subscribe('log', log_cb);
+	        ws.subscribe('urlopen', urlopen_cb);
+		subscription_cb();
+	    }
+	    var ws = new WearScriptConnection(websocket, "webapp", Math.floor(Math.random() * 100000), onopen);
+	    ws.subscribeTestHandler();
+	    function subscription_cb() {
+		glassConnectedCallback(ws.exists('glass'));
+	        // TODO(brandyn): Only do this once, then provide a button to refresh
+	    }
+	    function log_cb(channel, message) {
+	        console.log(channel + ': ' + message);
+	        // TODO(brandyn): Have a notification that a log message was sent
+	    }
+	    function gist_modify_cb(channel, gists) {
+	        HACK_GIST_MODIFIED = gists;
+	        console.log('Gist modified');
+	    }
+	    function gist_get_cb(channel, gist) {
+	        window.HACK_GIST = gist;
+	        console.log(channel + ': ' + gist);
+	    }
+	    function urlopen_cb(channel, url) {
+	        window.open(url);
+	    }
+	    return ws;
+	}
+
+</script>
+
+</body>
+</html>
