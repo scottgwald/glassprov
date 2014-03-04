@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>GlassProv</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/viewercss.css" rel="stylesheet">
+    <script type="text/javascript" src="js/viewer.js"></script>
+    <link href="videos/video-js/video-js.css" rel="stylesheet">
+    <script src="videos/video-js/video.js"></script>
+    <script src="jquery/jquery-1.9.0.min.js"></script>
+    <script>
+    ;(function($) {
+      $.fn.textfill = function(options) {
+          var fontSize = options.maxFontPixels;
+          var ourText = $('span:visible:first', this);
+          var maxHeight = $(this).height();
+          var maxWidth = $(this).width();
+          var textHeight;
+          var textWidth;
+          do {
+              ourText.css('font-size', fontSize);
+              textHeight = ourText.height();
+              textWidth = ourText.width();
+              fontSize = fontSize - 1;
+          } while ((textHeight > maxHeight || textWidth > maxWidth) && fontSize > 3);
+          return this;
+      }
+    })(jQuery);
+    $(document).ready(function() {
+      $('.q1').textfill({ maxFontPixels: 75 });
+      $('.q2').textfill({ maxFontPixels: 75 });
+      $('.q3').textfill({ maxFontPixels: 75 });
+      $('.q4').textfill({ maxFontPixels: 75 });
+    });
+
+    </script>
+  </head>
+
+  <body>
+
+<!-- <video id="example_video_1" class="video-js vjs-default-skin"
+  controls preload="auto" width="640" height="264"
+  data-setup='{"autoplay": true, "example_option":true}'>
+ <source src="videos/001.mp4" type='video/mp4' />
+ </video> -->
+
+  <div id="q1" class="container q1" style="width:50%; height:50%; float:left">
+    <div class="user">
+      kevin.b.tu
+    </div>
+    <div class="text-container">
+      <div class="text">
+        <span> Sample Text</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="q2" class="container q2" style="width:50%; height:50%; float:right">
+    <div class="user">
+      swgreen
+    </div>
+    <div class="text-container">
+      <div class="text">
+        <span>Sample Text</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="q3" class="container q3" style="width:50%; height:50%; float:left">
+    <div class="user">
+      shrig94
+    </div>
+    <div class="text-container">
+      <div class="text">
+        <span>Sample Text</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="q4" class="container q4" style="width:50%; height:50%; float:right">
+    <div class="user">
+      daniel.l.mendelsohn
+    </div>
+    <div class="text-container">
+      <div class="text">
+        <span>Sample Text</span>
+      </div>
+    </div>
+  </div>
+
+  <button id="testButton" style="color:black;"onclick="insertVideo('1','kevinsux@gmail.com','001.mp4');insertText('2','Shri','OMG THIS SAMPLE TEXT WORKS! LOOK AT THIS!');insertText('3','scottgwald','I am unimpressed...');insertVideo('4','Daniel','002.mp4');">Test!</button>
+  </body>
+</html>
