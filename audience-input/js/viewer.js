@@ -21,8 +21,8 @@ function insertText(quadrant,user,text){
 function insertVideo(quadrant,user,videoID){
   document.getElementsByClassName("user")[quadrant-1].innerHTML=user;
   var id = 'video'+quadrant;
-  var finalText = "<video id='"+id+"'"+" class='video-js vjs-default-skin'"+"controls preload='auto' width='600' height='300'"+" data-setup=\"{\"loop\": \"true\", \'autoplay\': true, \'example_option\':true}\""+"><source src="+"'"+"videos/"+videoID+"'"+" type='video/mp4' />"+"</video>";
+  var finalText = "<video id='"+id+"'"+" class='video-js vjs-default-skin'"+"controls preload='auto' width='100%' height='100%'"+"><source src="+"'"+"videos/"+videoID+"'"+" type='video/mp4' />"+"</video>";
   document.getElementsByClassName("text")[quadrant-1].innerHTML=finalText;
-  var myPlayer = videojs(id);
+  var myPlayer = videojs(id,{ "controls": false, "autoplay": true, "preload": "auto" ,"loop":true});
   myPlayer.play();
 }
