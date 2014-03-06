@@ -6,6 +6,8 @@ from django.views.decorators.http import require_http_methods
 
 #begin serializer https://github.com/Strangemother/django-djasoner
 from io import StringIO
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 try:
 
@@ -444,64 +446,75 @@ def serialize(data):
 
 # lines in a hat
 
+@csrf_exempt
 @require_http_methods(["POST"])
 def createLine(request):
-	text = request.POST["text"]
+	text = json.loads(request.body)['text']
 	data = Line.objects.create(text=text)
-	return self.create_response(request, serialize(data))
+	data.save()
+	return HttpResponse(serialize(data), content_type="application/json")
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getLine(request):
 	line = Line.objects.all()[random.randint(0, Line.objects.count() - 1)]
 	text = line.text
 	line.delete()
-	data = {"text":text, "glassid":request.GET["glassid"]}
-	return self.create_response(request, serialize(data))
+	data = {"text":text, "glassid":json.loads(request.body)["glassid"]}
+	return HttpResponse(serialize(data), content_type="application/json")
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getAllLines(request):
 	data = Line.objects.all()
-	return self.create_response(request, serialize(data))
+	return HttpResponse(serialize(data), content_type="application/json")
 
 
 # jump styles
-
+@csrf_exempt
 @require_http_methods(["POST"])
 def createEmotion(request):
-	text = request.POST["text"]
+	text = json.loads(request.body)["text"]
 	data = Emotion.objects.create(text=text)
-	return self.create_response(request, serialize(data))
+	data.save()
+	return HttpResponse(serialize(data), content_type="application/json")
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getEmotion(request):
 	emotion = Emotion.objects.order_by('-votes')[0]
 	text = emotion.text
 	emotion.delete()
-	data = {"text":text, "glassid":request.GET["glassid"]}
-	return self.create_response(request, serialize(data))
+	data = {"text":text, "glassid":json.loads(request.body)["glassid"]}
+	return HttpResponse(serialize(data), content_type="application/json")
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getAllEmotions(request):
 	data = Emotion.objects.all()
-	return self.create_response(request, serialize(data))
+	return HttpResponse(serialize(data), content_type="application/json")
 
 # news room
 
+@csrf_exempt
 @require_http_methods(["POST"])
 def createClip(request):
-	text = request.POST["text"]
+	text = json.loads(request.body)["text"]
 	data = Clip.objects.create(text=text)
-	return self.create_response(request, serialize(data))
+	data.save()
+	return HttpResponse(serialize(data), content_type="application/json")
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getClip(request):
 	clip = Clip.objects.order_by('-votes')[0]
 	text = clip.text
 	clip.delete()
-	data = {"text":text, "glassid":request.GET["glassid"]}
-	return self.create_response(request, serialize(data))
+	data = {"text":text, "glassid":json.loads(request.body)["glassid"]}
+	return HttpResponse(serialize(data), content_type="application/json")
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getAllClips(request):
 	data = Clip.objects.all()
-	return self.create_response(request, serialize(data))
+	return HttpResponse(serialize(data), content_type="application/json")
