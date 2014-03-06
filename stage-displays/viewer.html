@@ -10,7 +10,6 @@
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
     <title>GlassProv</title>
-
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,9 +17,86 @@
     <link href="css/viewercss.css" rel="stylesheet">
     <script type="text/javascript" src="js/viewer.js"></script>
     <link href="videos/video-js/video-js.css" rel="stylesheet">
+
     <script src="videos/video-js/video.js"></script>
-    <script src="jquery/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="js/msgpack.js"></script>
+    <script type="text/javascript" src="js/wearscript-client.js"></script>
+    <script type="text/javascript" src="js/reconnecting-websocket.js"></script>
+    <script type="text/javascript" src="jquery/jquery-1.11.0.min.js"></script>
+
+    <script type="text/javascript">
+      server = "wss://api.picar.us/wearscriptdev/ws";
+      //server = 'ws://api.picar.us/wearscriptdev/ws';
+      Socket = new ReconnectingWebSocket(server);
+      console.log("Made the socket.");
+      ws = myWearScriptConnectionFactory(Socket, function (connected) {
+        //$.ready(function() {
+          // $('#theDiv').html("WearScript Connected.");
+          // $('#theImage').attr('src', 'cute-little-cat.jpg');
+          // $('#theImage').attr('width', 1000);
+          console.log('Connected: ' + connected);
+        //});
+        });
+
+      // e.g. publish statement from broadcaster: 
+      // ws.publish("glassprov", {user: "kevin.b.tu", glass:"1", command: "showline", line: "What's my line"});
+      // ws.publish("glassprov", {user: "scottgwald", glass:"2", command: "playvideo", line: "001.mp4"});
+
+      // User: username
+      // glass: 1-4 (Which quadrant to display in)
+      // command: "showline" or "playvideo"
+      // line: text to display or video identifier
+      ws.subscribe('glassprov', glassprov_cb);
+      function glassprov_cb(channel, message) {
+        // update user name
+        var quadrant = message.glass-1;
+        document.getElementsByClassName("user")[quadrant].innerHTML=message.user;
+        if(message.command=="showline"){
+          document.getElementsByClassName("text")[quadrant].innerHTML=message.line;
+          $('text').textfill({ maxFontPixels: 75 });
+        } else if(message.command=="playvideo"){
+          var id = 'video'+quadrant;
+          var finalText = "<video loop autoplay preload id='"+id+"'"+" class='video-js vjs-default-skin'"+" preload='auto' width='530' height='300'"+"><source src="+"'"+"videos/"+message.line+"'"+" type='video/mp4' />"+"</video>";
+          document.getElementsByClassName("text")[quadrant].innerHTML=finalText;
+        }
+      }
+
+      function myWearScriptConnectionFactory(websocket, glassConnectedCallback) {
+          function onopen(event) {
+              console.log('opened');
+        ws.subscribe('subscriptions', subscription_cb);
+              ws.subscribe('log', log_cb);
+              ws.subscribe('urlopen', urlopen_cb);
+        subscription_cb();
+          }
+          var ws = new WearScriptConnection(websocket, "webapp", Math.floor(Math.random() * 100000), onopen);
+          ws.subscribeTestHandler();
+          function subscription_cb() {
+        glassConnectedCallback(ws.exists('glass'));
+              // TODO(brandyn): Only do this once, then provide a button to refresh
+          }
+          function log_cb(channel, message) {
+              console.log(channel + ': ' + message);
+              // TODO(brandyn): Have a notification that a log message was sent
+          }
+          function gist_modify_cb(channel, gists) {
+              HACK_GIST_MODIFIED = gists;
+              console.log('Gist modified');
+          }
+          function gist_get_cb(channel, gist) {
+              window.HACK_GIST = gist;
+              console.log(channel + ': ' + gist);
+          }
+          function urlopen_cb(channel, url) {
+              window.open(url);
+          }
+          return ws;
+      }
+    </script>
+
+
     <script>
+    // Code to auto resize text to fit in box.
     ;(function($) {
       $.fn.textfill = function(options) {
           var fontSize = options.maxFontPixels;
@@ -44,8 +120,12 @@
       $('.q3').textfill({ maxFontPixels: 75 });
       $('.q4').textfill({ maxFontPixels: 75 });
     });
-
+    
     </script>
+
+    
+
+
   </head>
 
   <body>
@@ -58,48 +138,46 @@
 
   <div id="q1" class="container q1" style="width:50%; height:50%; float:left">
     <div class="user">
-      kevin.b.tu
+
     </div>
     <div class="text-container">
       <div class="text">
-        <span> Sample Text</span>
+        <span></span>
       </div>
     </div>
   </div>
 
   <div id="q2" class="container q2" style="width:50%; height:50%; float:right">
     <div class="user">
-      swgreen
+
     </div>
     <div class="text-container">
       <div class="text">
-        <span>Sample Text</span>
+        <span></span>
       </div>
     </div>
   </div>
 
   <div id="q3" class="container q3" style="width:50%; height:50%; float:left">
     <div class="user">
-      shrig94
+
     </div>
     <div class="text-container">
       <div class="text">
-        <span>Sample Text</span>
+        <span></span>
       </div>
     </div>
   </div>
 
   <div id="q4" class="container q4" style="width:50%; height:50%; float:right">
     <div class="user">
-      daniel.l.mendelsohn
+
     </div>
     <div class="text-container">
       <div class="text">
-        <span>Sample Text</span>
+        <span></span>
       </div>
     </div>
   </div>
-
-  <button id="testButton" style="color:black;"onclick="insertVideo('1','kevinsux@gmail.com','001.mp4');insertText('2','Shri','OMG THIS SAMPLE TEXT WORKS! LOOK AT THIS!');insertText('3','scottgwald','I am unimpressed...');insertVideo('4','Daniel','002.mp4');">Test!</button>
   </body>
 </html>

@@ -1,6 +1,33 @@
+img {
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
+    margin-bottom:15px;
+    margin-top: 15px;
+    z-index: 50;
+    text-align: center;
+}
+
+img:hover {
+  filter: none; /* IE6-9 */
+  -webkit-filter: grayscale(0); /* Google Chrome, Safari 6+ & Opera 15+ */
+}
+.img-container{
+  margin-top: 20%;
+  height: 500px;
+}
+.row{
+  padding-left: 10%;
+  padding-right:10%;
+  z-index: 50;
+  position: relative;
+}
+
 body {
   padding-top: 50px;
-  background-color: #222;;
+  background-color: #222;
 }
 .starter-template {
   padding: 60px 15px;
@@ -8,43 +35,64 @@ body {
   color: white;
   text-shadow: 0.1em 0.1em #333;
 }
+.navbar{
+  z-index: 0;
+}
 .navbar-brand{
   padding-right: 30px;
 }
 .form-control{
-  margin-top: 10px;
-  margin-bottom: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 #about{
-  width: 100%;
-  height: 290px; 
-  background-color: #777;
+	width: 100%;
+	height: 290px; 
+	background-color: #777;
 }
 #contact{
-  width: 100%;
-  height: 290px; 
-  background-color: #777;
+	width: 100%;
+	height: 290px; 
+	background-color: #777;
 }
 .form-container{
-  color:black;
+	color:white;
 }
+.title{
+  font-size: 30px;
+}
+#l,#r{
+  z-index:10;
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
 /* Carousel base class */
 .carousel {
-  height: 290px;
+  height: 100%;
   margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
+  top:29%;
 } 
+.newsroom{
+  top:5%;
+}
+.form-container{
+  height: 700px;
+  overflow-y:scroll;
+}
 
+.container{
+    display: block;
+}
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 290px;
+  height: 100%;
   background-color: #777;
   min-width: 100%;
 }
@@ -53,5 +101,15 @@ body {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 290px;
+  height: 100%;
 }
+
+.carousel-indicators {
+  top:25px;
+}
+.carousel-inner {
+   margin-bottom:0px;
+}
+html,body{height:100%;}
+.carousel,.item,.active{height:100%;}
+.carousel-inner{height:100%;}

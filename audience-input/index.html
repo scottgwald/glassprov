@@ -22,7 +22,8 @@
 
     (function () {
       function contentLoaded () {
-
+        $("body").css("overflow", "hidden");
+        document.getElementsByClassName("txt")[0].focus();
         window.addEventListener('keyup', function (e) {
           if (e.keyCode === 38) { // up arrow
             // if(document.activeElement.value!=undefined){
@@ -50,6 +51,7 @@
         
         window.addEventListener('keyup', function (e) {
           if (e.keyCode === 13) { // enter key
+            processNewsroom();
             processInput();
           }}, false);
         }
@@ -93,15 +95,20 @@
         <li data-target="#myCarousel" data-slide-to="4"></li>
         <li data-target="#myCarousel" data-slide-to="5"></li>
         <li data-target="#myCarousel" data-slide-to="6"></li>
+        <li data-target="#myCarousel" data-slide-to="7"></li>
+        <li data-target="#myCarousel" data-slide-to="8"></li>
+        <li data-target="#myCarousel" data-slide-to="9"></li>
+        <li data-target="#myCarousel" data-slide-to="10"></li>
       </ol>
       <div class="carousel-inner">
         <div id="1" class="item active">
           <div class="container">
             <div class="carousel-caption">
-              <h1 class="title" STYLE="padding-bottom:10px;">Idea 1</h1> 
+              <h1 class="title" STYLE="padding-bottom:0px;">Lines From a Hat</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Enter a phrase, piece of advice, or quote</p>
               <div class="form-container">
                 <div class="form">
-                  <input id="i1" type="text" class="form-control txt" placeholder="Your idea!" onfocus="this.hasFocus=true" onblur="this.hasFocus=false"><br>
+                  <input type="text" class="form-control txt" placeholder="Your idea!" onfocus="this.hasFocus=true" onblur="this.hasFocus=false"><br>Hit Enter to Submit!<br><br>
                   <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
                 </div><br>
               </div>
@@ -111,7 +118,8 @@
         <div id="2" class="item">
           <div class="container">
             <div class="carousel-caption">
-              <h1 class="title" STYLE="padding-bottom:10px;">Idea 2</h1> 
+              <h1 class="title" STYLE="padding-bottom:0px;">Jump Styles</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Enter a style of movie, television, book, or theater</p>
               <div class="form-container">
                 <div class="form">
                   <input type="text" class="form-control txt" placeholder="Your idea!"><br>
@@ -124,7 +132,8 @@
         <div id="3" class="item">
           <div class="container">
             <div class="carousel-caption">
-              <h1 class="title" STYLE="padding-bottom:10px;">Idea 3</h1> 
+              <h1 class="title" STYLE="padding-bottom:0px;">Party Quirks 1</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Enter a verbal or physical quirk</p>
               <div class="form-container">
                 <div class="form">
                   <input type="text" class="form-control txt" placeholder="Your idea!"><br>
@@ -137,7 +146,8 @@
         <div id="4" class="item">
           <div class="container">
             <div class="carousel-caption">
-              <h1 class="title" STYLE="padding-bottom:10px;">Idea 4</h1> 
+              <h1 class="title" STYLE="padding-bottom:0px;">Party Quirks 2</h1>
+              <p class="subtext" STYLE="font-size:15px;">Enter the name of a celebrity (dead or alive)</p> 
               <div class="form-container">
                 <div class="form">
                   <input type="text" class="form-control txt" placeholder="Your idea!"><br>
@@ -150,7 +160,8 @@
         <div id="5" class="item">
           <div class="container">
             <div class="carousel-caption">
-              <h1 class="title" STYLE="padding-bottom:10px;">Idea 5</h1> 
+              <h1 class="title" STYLE="padding-bottom:0px;">Dubbed Scene</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Enter a location that can fit on our stage</p>
               <div class="form-container">
                 <div class="form">
                   <input type="text" class="form-control txt" placeholder="Your idea!"><br>
@@ -163,7 +174,8 @@
         <div id="6" class="item">
           <div class="container">
             <div class="carousel-caption">
-              <h1 class="title" STYLE="padding-bottom:10px;">Idea 6</h1> 
+              <h1 class="title" STYLE="padding-bottom:0px;">Foley Artist</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Do you want to come up on stage? If so, enter your name</p>
               <div class="form-container">
                 <div class="form">
                   <input type="text" class="form-control txt" placeholder="Your idea!"><br>
@@ -176,7 +188,8 @@
         <div id="7" class="item">
           <div class="container">
             <div class="carousel-caption">
-              <h1 class="title" STYLE="padding-bottom:10px;">Idea 7</h1> 
+              <h1 class="title" STYLE="padding-bottom:0px;">Translated Scene</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Enter a spoken language that is not English</p>
               <div class="form-container">
                 <div class="form">
                   <input type="text" class="form-control txt" placeholder="Your idea!"><br>
@@ -186,9 +199,112 @@
             </div>
           </div>
         </div>
+        <div id="8" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:0px;">Pledge Break 1</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Please enter a random object</p>
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="9" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:0px;">Pledge Break 2</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Please enter a random adjective</p>
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="10" class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1 class="title" STYLE="padding-bottom:0px;">Special Guest</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Please enter a type of party or reason to get together</p>
+              <div class="form-container">
+                <div class="form">
+                  <input type="text" class="form-control txt" placeholder="Your idea!"><br>
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="11" class="item">
+          <div class="container">
+            <div class="carousel-caption newsroom">
+              <h1 class="title" STYLE="padding-bottom:0px;">Newsroom</h1> 
+              <p class="subtext" STYLE="font-size:15px;">Please select 5 thumbnails</p>
+              <div class="form-container">
+                <div class="form">
+                  <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
+                </div><br>
+
+                <!-- <a href=""><img src="newsroom/thumbnail001.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail002.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail003.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail004.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail005.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail006.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail007.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail008.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail009.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail010.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail011.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail012.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail013.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail014.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail015.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail016.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail017.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail018.jpg" width="100" height="100"></a> -->
+              </div>  
+
+            </div>
+            <div class="img-container" style="overflow-y:auto;">
+              <div class="row">
+                    <div id="img001"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img001')"><img class="img-responsive" src="newsroom/thumbnail001.jpg"/></div>
+                    <div id="img002"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img002')"><img class="img-responsive" src="newsroom/thumbnail002.jpg" /></div>
+                    <div id="img003"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img003')"><img class="img-responsive" src="newsroom/thumbnail003.jpg" /></div>
+                    <div id="img005"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img005')"><img class="img-responsive" src="newsroom/thumbnail005.jpg" /></div>
+              </div>
+              <div class="row">
+                    <div id="img006"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img006')"><img class="img-responsive" src="newsroom/thumbnail006.jpg" /></div>
+                    <div id="img007"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img007')"><img class="img-responsive" src="newsroom/thumbnail007.jpg" /></div>
+                    <div id="img008"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img008')"><img class="img-responsive" src="newsroom/thumbnail008.jpg" /></div>
+                    <div id="img009"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img009')"><img class="img-responsive" src="newsroom/thumbnail009.jpg" /></div>
+              </div>
+              <div class="row">
+                    <div id="img010"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img010')"><img class="img-responsive" src="newsroom/thumbnail010.jpg" /></div>
+                    <div id="img011"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img011')"><img class="img-responsive" src="newsroom/thumbnail011.jpg" /></div>
+                    <div id="img012"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img012')"><img class="img-responsive" src="newsroom/thumbnail012.jpg" /></div>
+                    <div id="img013"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img013')"><img class="img-responsive" src="newsroom/thumbnail013.jpg" /></div>
+              </div>
+              <div class="row">
+                    <div id="img014"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img014')"><img class="img-responsive" src="newsroom/thumbnail014.jpg" /></div>
+                    <div id="img015"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img015')"><img class="img-responsive" src="newsroom/thumbnail015.jpg" /></div>
+                    <div id="img016"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img016')"><img class="img-responsive" src="newsroom/thumbnail016.jpg" /></div>
+                    <div id="img017"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img017')"><img class="img-responsive" src="newsroom/thumbnail001.jpg" /></div>
+              </div>
+              <br><br><br><br>
+            </div>
+          </div>
+        </div>
+
       </div>
-      <a id="l" onmouseover="if(counter<0){counter+=7;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter<0){counter+=7;}document.getElementsByClassName('txt')[counter].focus();"onclick="counter-=1;" class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a id="r" onmouseover="if(counter>6){counter=counter-7;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter>6){counter=counter-7;}document.getElementsByClassName('txt')[counter].focus();" onclick="counter+=1;" class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      <a id="l" onmouseover="if(counter<0){counter+=11;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter<0){counter+=11;}document.getElementsByClassName('txt')[counter].focus();"onclick="counter-=1;" class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a id="r" onmouseover="if(counter>10){counter=counter-11;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter>10){counter=counter-11;}document.getElementsByClassName('txt')[counter].focus();" onclick="counter+=1;" class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div><!-- /.carousel -->
 
 
