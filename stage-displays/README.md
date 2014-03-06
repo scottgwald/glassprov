@@ -1,5 +1,13 @@
-audience-input
-==============
+Stage-Displays
+-----------------------------------------
 
-A web application that gathers advanced input from audience members.
+ws.publish("glassprov", {user: "kevin.b.tu", glass:"1", command: "showline", line: "What's my line"});
+ws.publish("glassprov", {user: "scottgwald", glass:"2", command: "playvideo", line: "001.mp4"});
 
+
+Keyword: "glassprov"
+
+User: username
+glass: 1-4 (Which quadrant to display in)
+command: "showline" or "playvideo"
+line: text to display or video id
