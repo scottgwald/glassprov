@@ -22,7 +22,7 @@
 
     (function () {
       function contentLoaded () {
-        //$("body").css("overflow", "hidden");
+        $("body").css("overflow", "hidden");
         document.getElementsByClassName("txt")[0].focus();
         window.addEventListener('keyup', function (e) {
           if (e.keyCode === 38) { // up arrow
@@ -51,6 +51,7 @@
         
         window.addEventListener('keyup', function (e) {
           if (e.keyCode === 13) { // enter key
+            processNewsroom();
             processInput();
           }}, false);
         }
@@ -107,9 +108,8 @@
               <p class="subtext" STYLE="font-size:15px;">Enter a phrase, piece of advice, or quote</p>
               <div class="form-container">
                 <div class="form">
-                  <input type="text" class="form-control txt" placeholder="Your idea!" onfocus="this.hasFocus=true" onblur="this.hasFocus=false"><br>
+                  <input type="text" class="form-control txt" placeholder="Your idea!" onfocus="this.hasFocus=true" onblur="this.hasFocus=false"><br>Hit Enter to Submit!<br><br>
                   <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
-                  <br><br><br>Hit Enter to Submit!
                 </div><br>
               </div>
             </div>
@@ -250,7 +250,8 @@
                 <div class="form">
                   <button class="btn btn-small btn-primary" type="button" onclick="processInput()">Submit</button>
                 </div><br>
-                <a href=""><img src="newsroom/thumbnail001.jpg" width="100" height="100"></a>
+
+                <!-- <a href=""><img src="newsroom/thumbnail001.jpg" width="100" height="100"></a>
                 <a href=""><img src="newsroom/thumbnail002.jpg" width="100" height="100"></a>
                 <a href=""><img src="newsroom/thumbnail003.jpg" width="100" height="100"></a>
                 <a href=""><img src="newsroom/thumbnail004.jpg" width="100" height="100"></a>
@@ -267,8 +268,36 @@
                 <a href=""><img src="newsroom/thumbnail015.jpg" width="100" height="100"></a>
                 <a href=""><img src="newsroom/thumbnail016.jpg" width="100" height="100"></a>
                 <a href=""><img src="newsroom/thumbnail017.jpg" width="100" height="100"></a>
-                <a href=""><img src="newsroom/thumbnail018.jpg" width="100" height="100"></a>
+                <a href=""><img src="newsroom/thumbnail018.jpg" width="100" height="100"></a> -->
               </div>  
+
+            </div>
+            <div class="img-container" style="overflow-y:auto;">
+              <div class="row">
+                    <div id="img001"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img001')"><img class="img-responsive" src="newsroom/thumbnail001.jpg"/></div>
+                    <div id="img002"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img002')"><img class="img-responsive" src="newsroom/thumbnail002.jpg" /></div>
+                    <div id="img003"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img003')"><img class="img-responsive" src="newsroom/thumbnail003.jpg" /></div>
+                    <div id="img005"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img005')"><img class="img-responsive" src="newsroom/thumbnail005.jpg" /></div>
+              </div>
+              <div class="row">
+                    <div id="img006"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img006')"><img class="img-responsive" src="newsroom/thumbnail006.jpg" /></div>
+                    <div id="img007"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img007')"><img class="img-responsive" src="newsroom/thumbnail007.jpg" /></div>
+                    <div id="img008"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img008')"><img class="img-responsive" src="newsroom/thumbnail008.jpg" /></div>
+                    <div id="img009"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img009')"><img class="img-responsive" src="newsroom/thumbnail009.jpg" /></div>
+              </div>
+              <div class="row">
+                    <div id="img010"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img010')"><img class="img-responsive" src="newsroom/thumbnail010.jpg" /></div>
+                    <div id="img011"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img011')"><img class="img-responsive" src="newsroom/thumbnail011.jpg" /></div>
+                    <div id="img012"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img012')"><img class="img-responsive" src="newsroom/thumbnail012.jpg" /></div>
+                    <div id="img013"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img013')"><img class="img-responsive" src="newsroom/thumbnail013.jpg" /></div>
+              </div>
+              <div class="row">
+                    <div id="img014"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img014')"><img class="img-responsive" src="newsroom/thumbnail014.jpg" /></div>
+                    <div id="img015"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img015')"><img class="img-responsive" src="newsroom/thumbnail015.jpg" /></div>
+                    <div id="img016"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img016')"><img class="img-responsive" src="newsroom/thumbnail016.jpg" /></div>
+                    <div id="img017"class="col-md-3 col-sm-4 col-xs-6" onclick="imgClicked('img017')"><img class="img-responsive" src="newsroom/thumbnail001.jpg" /></div>
+              </div>
+              <br><br><br><br>
             </div>
           </div>
         </div>
