@@ -1,3 +1,5 @@
+var serverURL = "localhost";
+
 var results = new Array();
 var imgs = new Array();
 
@@ -21,8 +23,36 @@ function handleInput(){
     var title = document.getElementsByClassName("title")[counter].innerHTML; 
     results.push([title,inp]);
 
+    var text = [{"text":inp}];
+    var dataString = JSON.stringify(text);
+    var postArray = {json:dataString};
     // send results to server here
+    if(title=="Lines From a Hat"){
+      $.ajax({
+        type: "POST",
+        url: serverURL+"/api/lines/create/",
+        data: postArray,
+        dataType: 'json',
+        success: success,
+        dataType: dataType
+      });
+    }
+    if(title=="Jump Styles"){ 
+      $.ajax({
+        type: "POST",
+        url: serverURL+"/api/emotions/create/",
+        data: postArray,
+        dataType: 'json',
+        success: success,
+        dataType: dataType
+      });
+    }
 
+
+    // INSERT OTHER POST REQUESTS HERE
+
+
+    
     var right = document.getElementById('r');
     right.click();
   } 
@@ -58,16 +88,30 @@ function imgClicked(id){
         imgs.splice(index,1);
       }
   }
-//  alert(imgs);
 }
  
 function processNewsroom(){
   if(imgs.length>0){
-    // send list of imgs to server here
 
     for (var i in imgs) {
       var item = document.getElementById(imgs[i]);
       item.setAttribute("style","background-color:#777;");
+
+      // send item to server
+      var text = [{"text":imgs[i]}];
+      var dataString = JSON.stringify(text);
+      var postArray = {json:dataString};
+
+      $.ajax({
+        type: "POST",
+        url: serverURL+"/api/clips/create/",
+        data: postArray,
+        dataType: 'json',
+        success: success,
+        dataType: dataType
+      });
+
+
     } 
     imgs.length=0;
     var right = document.getElementById('r');
