@@ -1,0 +1,34 @@
+<html style="width:100%; height:100%; overflow:hidden">
+<body style="width:100%; height:100%; overflow:hidden; margin:0">
+<script>
+function server() {
+    WS.say('starting');
+    WS.displayCardTree();
+    var tree = new WS.Cards();
+    tree.add(' ');
+    WS.log(JSON.stringify(tree));
+    WS.cardTree(tree);
+    WS.subscribe('lines', lines_cb);
+}
+
+function lines_cb(channel, data) {
+    console.log("data.text: " + data.text);
+    if (data.hasOwnProperty('text')) {
+        var text = data.text;
+        var tree = new WS.Cards();
+        tree.add(text);
+        WS.log(JSON.stringify(tree));
+        WS.cardTree(tree);
+    } else {
+        //TODO: handle this case
+    }
+}
+
+function main() {
+    if (WS.scriptVersion(1)) return;
+    WS.serverConnect('{{WSUrl}}', 'server');
+}
+window.onload = main;
+</script>
+</body>
+</html>
