@@ -8,7 +8,7 @@ function server() {
     tree.add(' ');
     WS.log(JSON.stringify(tree));
     WS.cardTree(tree);
-    WS.subscribe('lines',lines_cb);
+    WS.subscribe('lines', lines_cb);
 }
 
 function lines_cb(channel, data) {
@@ -20,7 +20,7 @@ function lines_cb(channel, data) {
         WS.log(JSON.stringify(tree));
         WS.cardTree(tree);
     } else {
-        //TODO: handle
+        //TODO: handle this case
     }
 }
 
