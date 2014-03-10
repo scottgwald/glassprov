@@ -18,6 +18,9 @@ try:
     from django.utils import simplejson
     from datetime import datetime, date
     from django.http import HttpResponse
+    from django.shortcuts import render_to_response
+    from django.conf import settings
+
 except ImportError:
     django_lib = False
 else:
@@ -518,3 +521,33 @@ def getClip(request):
 def getAllClips(request):
 	data = Clip.objects.all()
 	return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def wstest(request):
+    return render_to_response("wstest.html")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def wsline(request):
+    line = "Hilarity"
+    arg = request.GET.get('line')
+    if arg is not None:
+        line = arg
+    print "Line is " + line
+    settings.WSCONN.send(
+        'glass',
+        'script',
+        {'glass.html':
+        """
+        <script>
+        WS.wake();
+        WS.activityCreate();
+        WS.displayCardTree();
+        var tree = new WS.Cards();
+        tree.add('%s', 'GlassProv');
+        WS.cardTree(tree);
+        </script>
+        """ % line}
+    )
+    return render_to_response("wstest.html", {'line': line})
