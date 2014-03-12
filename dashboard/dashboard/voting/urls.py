@@ -11,8 +11,10 @@ from .views import (
 
 	createClip,
 	getClip,
-	getAllClips
+	getAllClips,
 
+	wstest,
+	wsline
 )
 
 urlpatterns = (
@@ -29,5 +31,7 @@ urlpatterns = (
 	url(r"^clips/get/$", getClip, name="getClip"),
 	url(r"^clips/getall/$", getAllClips, name="getAllClips"),
 
+	url(r"^ws/$", wstest, name="wstest"),
+	url(r"^ws/line/$", wsline, name="wsline")
 
 )

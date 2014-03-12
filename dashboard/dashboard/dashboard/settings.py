@@ -40,6 +40,11 @@ INSTALLED_APPS = (
     'voting'
 )
 
+TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
+ 'django.template.loaders.app_directories.Loader')
+
+TEMPLATE_DIRS = (BASE_DIR + '/dashboard/templates',)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -87,3 +92,34 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+
+# WEARSCRIPT
+
+import websocket
+from wearscript.socket import websocket_client_factory,websocket_server,WebSocketClientConnection
+try:
+    print "os.environ['WEARSCRIPT_ENDPOINT'] is %s" % (os.environ['WEARSCRIPT_ENDPOINT'])
+except KeyError:
+    print "os.environ['WEARSCRIPT_ENDPOINT'] not set."
+    os.environ['WEARSCRIPT_ENDPOINT'] = 'wss://api.picar.us/wearscriptdev/ws/QGiOtnhW8Byc5Tiv'
+client_endpoint = os.environ['WEARSCRIPT_ENDPOINT']
+print "Using client_endpoint %s" % client_endpoint
+WSCONN = WebSocketClientConnection(websocket.create_connection(client_endpoint))
+WSCONN.send(
+    'glass',
+    'script',
+    {'glass.html':
+    """
+    <script>
+    WS.wake();
+    WS.activityCreate();
+    WS.displayCardTree();
+    var tree = new WS.Cards();
+    tree.add('GlassProv', '');
+    WS.cardTree(tree);
+    </script>
+    """}
+)
