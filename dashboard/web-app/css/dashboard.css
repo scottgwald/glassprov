@@ -22,10 +22,9 @@ tr,td{
   font-style: normal;
 }
 .screen{
-  width:33.333333%;
-  height:100%;
+  width:450px;
+  height:300px;
   border:2px solid white;
-  float:left;
   background:#1C1C1C;
 }
 

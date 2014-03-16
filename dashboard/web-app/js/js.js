@@ -54,25 +54,13 @@ function handleRequest(user){
 function updateScreens(){
 	var table = document.getElementById("content-table");
 	//reset status:
-	document.getElementById("userL").innerHTML = "Left: None"
-	document.getElementById("userC").innerHTML = "Center: None"
-	document.getElementById("userR").innerHTML = "Right: None"
-	document.getElementById("screenL").innerHTML ="";
-	document.getElementById("screenC").innerHTML ="";
-	document.getElementById("screenR").innerHTML ="";
+	document.getElementById("user1").innerHTML = "User: None"
+	document.getElementById("screen1").innerHTML ="";
 
 	for (var i = 0, row; row = table.rows[i]; i++) {
-	   	if(row.cells[2].innerHTML=="Screen: L"){
-	   		document.getElementById("userL").innerHTML = "Left: "+row.cells[0].innerHTML;
-	   		document.getElementById("screenL").innerHTML = row.cells[1].innerHTML;
-	   	} 
-	   	else if(row.cells[2].innerHTML=="Screen: C"){
-	   		document.getElementById("userC").innerHTML = "Center: "+row.cells[0].innerHTML;
-	   		document.getElementById("screenC").innerHTML = row.cells[1].innerHTML;
-	   	}
-	   	else if(row.cells[2].innerHTML=="Screen: R"){
-	   		document.getElementById("userR").innerHTML = "Right: "+row.cells[0].innerHTML;
-	   		document.getElementById("screenR").innerHTML = row.cells[1].innerHTML;
+	   	if(row.cells[2].innerHTML=="Screen: On"){
+	   		document.getElementById("user1").innerHTML = "User: "+row.cells[0].innerHTML;
+	   		document.getElementById("screen1").innerHTML = row.cells[1].innerHTML;
 	   	} 
 	}
 }
@@ -80,7 +68,7 @@ function overwriteScreen(screen){
 	var table = document.getElementById("content-table");
 	for (var i = 0, row; row = table.rows[i]; i++) {
 	   	if(row.cells[2].innerHTML==screen){
-	   		row.cells[2].innerHTML="Screen: None";
+	   		row.cells[2].innerHTML="Screen: Off";
 	   	} 
 	}
 }
