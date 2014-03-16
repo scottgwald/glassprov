@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <!-- Page Specific CSS -->
+    <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+    <script type="text/javascript" src="js/js.js"></script>     
+
+  </head>
+
+  <body>
+
+    <div id="wrapper">
+
+      <!-- Sidebar -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a onclick="select('lines')" class="navbar-brand" href="#">Glassprov - Dashboard</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav side-nav">
+            <li id="lines" class="active"><a onclick="select('lines')" href="#"><i class="fa"></i> Lines From a Hat</a></li>
+            <li id="dinnerparty"><a onclick="select('dinnerparty')"href="#"><i class="fa"></i>Dinner Party</a></li>
+            <li id="jumpgenre"><a onclick="select('jumpgenre')" href="#"><i class="fa"></i>Jump Genre</a></li>
+            <li id="googleeyes"><a onclick="select('googleeyes')" href="#"><i class="fa"></i>Google Eyes</a></li>
+            <li id="pledgebreak"><a onclick="select('pledgebreak')" href="#"><i class="fa"></i>Pledge Break</a></li>
+            <li id="foleyartist"><a onclick="select('foleyartist')" href="#"><i class="fa"></i>Foley Artist</a></li>
+            <li id="partyquirks"><a onclick="select('partyquirks')" href="#"><i class="fa"></i>Party Quirks</a></li>
+            <li id="newsroom"><a onclick="select('newsroom')" href="#"><i class="fa"></i>Newsroom</a></li>
+            <li id="translate"><a onclick="select('translate')" href="#"><i class="fa"></i>Translate</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right navbar-user">
+            <li class="dropdown user-dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-table"></i> Navigation <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#"><i class="fa fa-wrench"></i> Admin Page </a></li>
+                <li><a href="#"><i class="fa fa-user"></i> Audience Input <span class="badge"></span></a></li>
+                <li><a href="#"><i class="fa fa-edit"></i> Stage Display </a></li>
+                <li class="divider"></li>
+                <li><a href="#"><i class="fa fa-power-off"></i> Logout </a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+
+      <div id="page-wrapper">
+        <div class="content-title">Performers</div>
+        <table id="content-table" style="width:100%;">
+          <tr>
+            <td></td>
+            <td></td> 
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td> 
+            <td></td>
+          </tr>
+        </table>
+
+        <div class="content-title">Screens</div>
+        <table class="screen-labels"style="width:100%;">
+          <tr>
+            <td id="userL">Left: None</td>
+            <td id="userC">Center: None</td> 
+            <td id="userR">Right: None</td>
+          </tr>
+        </table>
+        <div id="content-screens" style="width:100%;height:250px;border:2px solid white;">
+          <div class="screen"style="height:100%;display:table;">
+            <div id="screenL" style="vertical-align:middle;display:table-cell;width:100%;color:white;text-align:center;">
+              
+            </div>
+          </div>
+          <div class="screen"style="height:100%;display:table;">
+            <div id="screenC" style="vertical-align:middle;display:table-cell;width:100%;color:white;text-align:center;">
+              
+            </div>
+          </div>
+          <div class="screen"style="height:100%;display:table;">
+            <div id="screenR" style="vertical-align:middle;display:table-cell;width:100%;color:white;text-align:center;">
+              
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /#page-wrapper -->
+
+    </div><!-- /#wrapper -->
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+    <!-- Page Specific Plugins -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+    <script src="js/morris/chart-data-morris.js"></script>
+    <script src="js/tablesorter/jquery.tablesorter.js"></script>
+    <script src="js/tablesorter/tables.js"></script>
+
+  </body>
+</html>
