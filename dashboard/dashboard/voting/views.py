@@ -529,7 +529,7 @@ def createClip(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getClip(request):
-    clip = Clip.objects.filter(timestamp=None)order_by('-votes')[0]
+    clip = Clip.objects.filter(timestamp=None).order_by('-votes')[0]
     text = clip.text
     clip.timestamp = datetime.datetime.now()
     clip.save()

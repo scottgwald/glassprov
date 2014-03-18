@@ -9,7 +9,7 @@ class Line(models.Model):
 
 	def __str__(self):
 		return self.text
- 
+
 
 class Emotion(models.Model):
 	text = models.CharField(max_length=140)
@@ -46,5 +46,5 @@ class PartyQuirk(models.Model):
 	timestamp = models.DateTimeField(default=None, null=True)
 
 	def __str__(self):
-		return self.text				
+		return self.text
 
