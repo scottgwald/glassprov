@@ -27,7 +27,7 @@ function handleInput(){
     var textString = JSON.stringify(textJson);
     // send results to server here
     var success = function() {
-      console.log("Submitted line: " + dataString);
+      console.log("Submitted line: " + textString);
     }
     if(title=="Lines From a Hat"){
       $.ajax({
