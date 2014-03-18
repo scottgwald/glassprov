@@ -1,4 +1,4 @@
-var serverURL = "localhost";
+var serverURL = "http://localhost:8000";
 
 var results = new Array();
 var imgs = new Array();
@@ -23,18 +23,20 @@ function handleInput(){
     var title = document.getElementsByClassName("title")[counter].innerHTML; 
     results.push([title,inp]);
 
-    var text = [{"text":inp}];
-    var dataString = JSON.stringify(text);
-    var postArray = {json:dataString};
+    var textJson = {"text": inp};
+    var textString = JSON.stringify(textJson);
     // send results to server here
+    var success = function() {
+      console.log("Submitted line: " + dataString);
+    }
     if(title=="Lines From a Hat"){
       $.ajax({
         type: "POST",
-        url: serverURL+"/api/lines/create/",
-        data: postArray,
+        url: serverURL + "/api/lines/create/",
+        data: textString,
+        contentType: "application/json",
         dataType: 'json',
         success: success,
-        dataType: dataType
       });
     }
     if(title=="Jump Styles"){ 
