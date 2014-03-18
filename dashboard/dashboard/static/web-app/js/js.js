@@ -39,7 +39,7 @@ function changeContent(name,content){
         url: serverURL + "/api/ws/line/",
         dataType: 'json',
         success: success,
-        data:line;
+        data: line
     });
     console.log("Content: " + str + "  Sent");
 
