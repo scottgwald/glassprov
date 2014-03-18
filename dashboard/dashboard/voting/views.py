@@ -17,7 +17,7 @@ try:
     from django.utils.encoding import smart_unicode
     from django.utils.simplejson import dumps
     from django.utils import simplejson
-    from datetime import datetime, date
+    # from datetime import datetime, date
     from django.http import HttpResponse
     from django.shortcuts import render_to_response
     from django.conf import settings
