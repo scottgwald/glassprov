@@ -472,7 +472,8 @@ def getLine(request):
     # return HttpResponse(serialize(data), content_type="application/json")
 
     # SHRI'S CHANGES, WITH MINOR MODS
-    line = Line.objects.filter(timestamp=None)[random.randint(0, Line.objects.filter(timestamp=None).count() - 1)]
+    line = Line.objects.all()[random.randint(0, Line.objects.count() - 1)]  
+    # line = Line.objects.filter(timestamp=None)[random.randint(0, Line.objects.filter(timestamp=None).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
