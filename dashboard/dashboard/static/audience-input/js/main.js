@@ -1,4 +1,4 @@
-var serverURL = "http://localhost:8000";
+var serverURL = "http://golden-ticket.media.mit.edu:8000";
 
 var results = new Array();
 var imgs = new Array();

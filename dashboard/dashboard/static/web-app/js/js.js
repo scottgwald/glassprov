@@ -1,5 +1,5 @@
 var currentGame = "lines"
-var serverURL = "http://localhost:8000";
+var serverURL = "http://golden-ticket.media.mit.edu:8000";
 
 function select(game){
     document.getElementById(currentGame).setAttribute("class","");
