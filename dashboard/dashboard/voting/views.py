@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Line, Emotion, Clip
+from .models import Line, Emotion, Clip, PledgeBreak1, PledgeBreak2, PartyQuirk
 
 import random
 from django.views.decorators.http import require_http_methods
@@ -8,6 +8,7 @@ from django.views.decorators.http import require_http_methods
 from io import StringIO
 from django.views.decorators.csrf import csrf_exempt
 import json
+import datetime
 
 try:
 
@@ -460,12 +461,24 @@ def createLine(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getLine(request):
-    line = Line.objects.all()[random.randint(0, Line.objects.count() - 1)]
+    # WORKS PRIOR TO SHRI'S CHANGES
+
+    # line = Line.objects.all()[random.randint(0, Line.objects.count() - 1)]
+    # text = line.text
+    # # sadface. How is history maintained?
+    # # line.delete()
+    # data = {"text": text}
+    # # data = {"text":text, "glassid":json.loads(request.body)["glassid"]}
+    # return HttpResponse(serialize(data), content_type="application/json")
+
+    # SHRI'S CHANGES, WITH MINOR MODS
+    line = Line.objects.filter(timestamp=None)[random.randint(0, Line.objects.filter(timestamp=None).count() - 1)]
     text = line.text
-    # sadface. How is history maintained?
-    # line.delete()
+    line.timestamp = datetime.datetime.now()
+    line.save()
     data = {"text": text}
-    # data = {"text":text, "glassid":json.loads(request.body)["glassid"]}
+    # data = {"text":text, "glassid":request.GET["glassid"]}
+    #    # WS send to request.GET["glassid"] glass and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
@@ -476,6 +489,7 @@ def getAllLines(request):
 
 
 # jump styles
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def createEmotion(request):
@@ -487,16 +501,19 @@ def createEmotion(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getEmotion(request):
-    emotion = Emotion.objects.order_by('-votes')[0]
+    emotion = Emotion.objects.filter(timestamp=None, id=request.GET["id"])[0]
     text = emotion.text
-    emotion.delete()
-    data = {"text":text, "glassid":json.loads(request.body)["glassid"]}
+    emotion.timestamp=datetime.datetime.now()
+    emotion.save()
+    data = {"text":text}
+    # WS: send to all glasses and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getAllEmotions(request):
     data = Emotion.objects.all()
+    # WS: send to dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
 # news room
@@ -512,10 +529,12 @@ def createClip(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getClip(request):
-    clip = Clip.objects.order_by('-votes')[0]
+    clip = Clip.objects.filter(timestamp=None)order_by('-votes')[0]
     text = clip.text
-    clip.delete()
-    data = {"text":text, "glassid":json.loads(request.body)["glassid"]}
+    clip.timestamp = datetime.datetime.now()
+    clip.save()
+    data = {"text":text, "glassid":request.GET["glassid"]}
+    # WS: send to glass request.GET["glassid"] and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
@@ -553,3 +572,78 @@ def wsline(request):
         """ % line}
     )
     return render_to_response("wstest.html", {'line': line})
+
+# lines in a hat
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createPartyQuirk(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getPartyQuirk(request):
+    line = PartyQuirk.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text, "glassid":request.GET["glassid"]}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getAllPartyQuirks(request):
+    data = PartyQuirk.objects.all()
+    # WS: send to dashboard
+    return HttpResponse(serialize(data), content_type="application/json")
+
+# lines in a hat
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createPledgeBreak1(request):
+    text = json.loads(request.body)['text']
+    data = PledgeBreak1.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createPledgeBreak2(request):
+    text = json.loads(request.body)['text']
+    data = PledgeBreak2.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")    
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getPledgeBreak(request):
+    line = PledgeBreak1.objects.filter(timestamp=None, id=request.GET["id1"])[0]
+    text = line.text
+
+    line2 = PledgeBreak2.objects.filter(timestamp=None, id=request.GET["id2"])[0]
+    text2 = line2.text
+
+    line.timestamp = datetime.datetime.now()
+    line2.timestamp = datetime.datetime.now()
+
+    line.save()
+    line2.save()
+
+    data = {"text":text, "text2":text2, "glassid":request.GET["glassid"]}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getAllPledgeBreaks(request):
+    pb1 = PledgeBreak1.objects.filter(timestamp=None)
+    pb2 = PledgeBreak2.objects.filter(timestamp=None)
+
+    data = {"pb1": pb1, "pb2": pb2}
+    # WS send to dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")

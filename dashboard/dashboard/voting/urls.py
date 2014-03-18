@@ -13,6 +13,15 @@ from .views import (
 	getClip,
 	getAllClips,
 
+	createPartyQuirk,
+	getPartyQuirk,
+	getAllPartyQuirks,
+
+	createPledgeBreak1,
+	createPledgeBreak2,
+	getPledgeBreak,
+	getAllPledgeBreaks
+
 	wstest,
 	wsline
 )
@@ -33,5 +42,14 @@ urlpatterns = (
 
 	url(r"^ws/$", wstest, name="wstest"),
 	url(r"^ws/line/$", wsline, name="wsline")
+
+	url(r"^partyquirk/create/$", createPartyQuirk, name="createPartyQuirk"),
+	url(r"^partyquirk/get/$", getPartyQuirk, name="getPartyQuirk"),
+	url(r"^partyquirk/getall/$", getAllPartyQuirks, name="getAllPartyQuirks"),
+
+	url(r"^pledgebreak/create1/$", createPledgeBreak1, name="createPledgeBreak1"),
+	url(r"^pledgebreak/create2/$", createPledgeBreak2, name="createPledgeBreak2"),
+	url(r"^pledgebreak/get/$", getPledgeBreak, name="getPledgeBreak"),
+	url(r"^pledgebreak/getall/$", getAllPledgeBreaks, name="getAllPledgeBreaks")
 
 )
