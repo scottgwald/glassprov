@@ -28,6 +28,21 @@ function insertPerformer(uname,content,screen){
 function changeContent(name,content){
     var contentID = name+"-content";
     document.getElementById(contentID).innerHTML = content;
+
+    var str = encodeURIComponent(content);
+
+    var line = "line=" + str;
+
+
+    $.ajax({
+        type: "GET",
+        url: serverURL + "/api/ws/line/",
+        dataType: 'json',
+        success: success,
+        data:line;
+    });
+    console.log("Content: " + str + "  Sent");
+
     updateScreens();
 }
 function changeScreen(name,screen){
@@ -58,6 +73,7 @@ function handleRequest(user){
         dataType: 'json',
         success: success,
     });
+
     console.log("Handle request.");
     // alert("SEND CONTENT FROM: "+currentGame + "  TO  " + user);
     // send request to server to get content to update.
