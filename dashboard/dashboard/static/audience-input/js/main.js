@@ -13,9 +13,9 @@ function processInput(){
   defocus();
   setTimeout(handleInput,200);
   setTimeout(textFocus,500);
+  return false;
 } 
 function handleInput(){
-
   var inp = document.getElementsByClassName("txt")[counter].value;
   
   if(inp!=''){
@@ -29,6 +29,11 @@ function handleInput(){
     var success = function() {
       console.log("Submitted line: " + textString);
     }
+    var right = document.getElementById('r');
+    right.click();
+
+
+    // ADD SERVER INTERACTION FOR ALL GAMES
     if(title=="Lines From a Hat"){
       $.ajax({
         type: "POST",
@@ -51,12 +56,6 @@ function handleInput(){
     }
 
 
-    // INSERT OTHER POST REQUESTS HERE
-
-
-    
-    var right = document.getElementById('r');
-    right.click();
   } 
 }
  
