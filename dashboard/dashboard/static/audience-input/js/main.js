@@ -4,11 +4,11 @@ var results = new Array();
 var imgs = new Array();
 
 function processInput(){
-  if(counter>10){
-    counter-=11;
+  if(counter>5){
+    counter-=6;
   }
   if(counter<0){
-    counter+=11;
+    counter+=6;
   }
   defocus();
   setTimeout(handleInput,200);
@@ -44,15 +44,55 @@ function handleInput(){
         success: success,
       });
     }
-    if(title=="Jump Styles"){ 
+    if(title=="Dinner Party"){ 
       $.ajax({
         type: "POST",
-        url: serverURL+"/api/emotions/create/",
-        data: postArray,
+        url: serverURL+"/api/dinnerparty/create/",
+        data: textString,
         dataType: 'json',
         success: success,
         dataType: dataType
       });
+    }
+    if(title=="Jump Genre"){
+	$.ajax({
+		type: "POST",
+		    url: serverURL+"/api/jumpgenre/create/",
+		    data: textString,
+		    dataType: 'json',
+		    success: success,
+		    dataType: dataType
+		    });
+    }
+    if(title=="Product Pitch"){
+	$.ajax({
+		type: "POST",
+		    url: serverURL+"/api/productpitch/create/",
+		    data: textString,
+		    dataType: 'json',
+		    success: success,
+		    dataType: dataType
+		    });
+    }
+    if(title=="Party Quirks 1"){
+	$.ajax({
+		type: "POST",
+		    url: serverURL+"/api/partyquirks1/create/",
+		    data: textString,
+		    dataType: 'json',
+		    success: success,
+		    dataType: dataType
+		    });
+    }
+    if(title=="Party Quirks 2"){
+	$.ajax({
+		type: "POST",
+		    url: serverURL+"/api/partyquirks2/create/",
+		    data: textString,
+		    dataType: 'json',
+		    success: success,
+		    dataType: dataType
+		    });
     }
 
 
