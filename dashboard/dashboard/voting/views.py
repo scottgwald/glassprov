@@ -574,6 +574,31 @@ def wsline(request):
     )
     return render_to_response("wstest.html", {'line': line})
 
+@csrf_exempt
+@require_http_methods(["GET"])
+def wsline1(request):
+    line = "Hilarity"
+    arg = request.GET.get('line')
+    argID = request.GET.get('glassID')
+    if arg is not None:
+        line = arg
+    print "Line is " + line
+    settings.WSCONN.send(
+        'glass',
+        'script',
+        {'glass.html':
+        """                                   
+        <script>                     
+        console.log('myID ' + WSRAW.getGlassID());
+        if(WSRAW.getGlassID()=="%s"){
+        WS.wake();                                                                                                                                                                          WS.activityCreate();                                                                                                                                                                WS.displayCardTree();                                                                                                                                                 
+        var tree = new WS.Cards();                                                                                                                                                          tree.add('%s', 'GlassProv');                                                                                                                                                        WS.cardTree(tree);                                                                                              
+        } 
+        </script>                                                                                                                                                                    
+        """ % (argID, line)}
+    )
+    return render_to_response("wstest.html", {'line': line})
+
 # lines in a hat
 
 @csrf_exempt

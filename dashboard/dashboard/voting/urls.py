@@ -26,7 +26,8 @@ from .views import (
         getAllCelebrities,
 
         wstest,
-        wsline
+        wsline,
+        wsline1
 )
 
 urlpatterns = (
@@ -56,6 +57,7 @@ urlpatterns = (
         url(r"^partyquirks2/getall/$", getAllCelebrities, name="getAllCelebrities"),
 
         url(r"^ws/$", wstest, name="wstest"),
-        url(r"^ws/line/$", wsline, name="wsline")
+        url(r"^ws/line/$", wsline, name="wsline"),
+        url(r"^ws/line1/$", wsline1, name="wsline1")
 
 )

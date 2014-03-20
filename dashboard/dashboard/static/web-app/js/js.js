@@ -1,5 +1,7 @@
-var currentGame = "lines"
+var currentGame = "lines";
 var serverURL = "http://golden-ticket.media.mit.edu:8000";
+var IDlist = ["f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf"];
+
 
 function select(game){
     document.getElementById(currentGame).setAttribute("class","");
@@ -20,9 +22,13 @@ function insertPerformer(uname,content,screen){
     cell2.id = name+"-content";
     var cell3 = row.insertCell(2);
     cell3.id = name+"-screen";
+    var cell4 = row.insertCell(3);
+    cell4.id = name+"-id";
+
     cell1.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:black;'>"+name+"</a>";
     cell2.innerHTML = content;
     cell3.innerHTML = screen;
+    cell4.innerHTML = IDlist.pop();
     updateScreens();
 }
 function changeContent(name,content){
@@ -30,17 +36,27 @@ function changeContent(name,content){
     document.getElementById(contentID).innerHTML = content;
 
     var str = encodeURIComponent(content);
-
-    var line = "line=" + str;
-
+    var tempID = name+"-id";
+    var id = document.getElementById(tempID).innerHTML;
+    var finalID = encodeURIComponent(id);
+    var line = "line=" + str + "&" + "glassID=" + finalID;
 
     $.ajax({
         type: "GET",
-        url: serverURL + "/api/ws/line/",
+        url: serverURL + "/api/ws/line1/",
         dataType: 'json',
         success: success,
         data: line
     });
+
+
+    //    $.ajax({
+    //    type: "GET",
+    //    url: serverURL + "/api/ws/line/",
+    //    dataType: 'json',
+    //    success: success,
+    //    data: line
+    //});
     console.log("Content: " + str + "  Sent");
 
     updateScreens();
@@ -67,14 +83,57 @@ function handleRequest(user){
         console.log(data.text);
         changeContent(user, data.text);
     }
-    $.ajax({
-        type: "GET",
-        url: serverURL + "/api/lines/get/",
-        dataType: 'json',
-        success: success,
-    });
+    if(currentGame="lines"){
+	$.ajax({
+	    type: "GET",
+	    url: serverURL + "/api/lines/get/",
+	    dataType: 'json',
+	    success: success,
+	});
+    }
+    if(currentGame="dinnerparty"){
+        $.ajax({
+		type: "GET",
+		    url: serverURL + "/api/dinnerparty/get/",
+		    dataType: 'json',
+		    success: success,
+        });
+    }
+    if(currentGame="jumpgenre"){
+        $.ajax({
+                type: "GET",
+                    url: serverURL + "/api/jumpgenre/get/",
+                    dataType: 'json',
+                    success: success,
+		    });
+    }
+    if(currentGame="productpitch"){
+        $.ajax({
+                type: "GET",
+                    url: serverURL + "/api/productpitch/get/",
+                    dataType: 'json',
+                    success: success,
+		    });
+    }
+    if(currentGame="partyquirks1"){
+        $.ajax({
+                type: "GET",
+                    url: serverURL + "/api/partyquirks1/get/",
+                    dataType: 'json',
+                    success: success,
+		    });
+    }
+    if(currentGame="partyquirks2"){
+        $.ajax({
+                type: "GET",
+                    url: serverURL + "/api/partyquirks2/get/",
+                    dataType: 'json',
+                    success: success,
+		    });
+    }
 
-    console.log("Handle request.");
+
+    console.log("Handle request!");
     // alert("SEND CONTENT FROM: "+currentGame + "  TO  " + user);
     // send request to server to get content to update.
 
