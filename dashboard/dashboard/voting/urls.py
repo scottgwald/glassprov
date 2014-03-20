@@ -1,29 +1,32 @@
 from django.conf.urls import patterns, url
-
+ 
 from .views import (
 	createLine,
 	getLine,
 	getAllLines,
 
-	createEmotion,
-	getEmotion,
-	getAllEmotions,
+	createLocation,
+        getLocation,
+        getAllLocations,
 
-	createClip,
-	getClip,
-	getAllClips,
+        createStyle,
+        getStyle,
+        getAllStyles,
 
-	createPartyQuirk,
-	getPartyQuirk,
-	getAllPartyQuirks,
+        createNoun,
+        getNoun,
+        getAllNouns,
 
-	createPledgeBreak1,
-	createPledgeBreak2,
-	getPledgeBreak,
-	getAllPledgeBreaks,
+        createQuirk,
+        getQuirk,
+        getAllQuirks,
+        
+        createCelebrity,
+        getCelebrity,
+        getAllCelebrities,
 
-	wstest,
-	wsline
+        wstest,
+        wsline
 )
 
 urlpatterns = (
@@ -32,24 +35,27 @@ urlpatterns = (
 	url(r"^lines/get/$", getLine, name="getLine"),
 	url(r"^lines/getall/$", getAllLines, name="getAllLines"),
 
-	url(r"^emotions/create/$", createEmotion, name="createEmotion"),
-	url(r"^emotions/get/$", getEmotion, name="getEmotion"),
-	url(r"^emotions/getall/$", getAllEmotions, name="getAllEmotions"),
+        url(r"^dinnerparty/create/$", createLocation, name="createLocation"),
+        url(r"^dinnerparty/get/$", getLocation, name="getLocation"),
+        url(r"^dinnerparty/getall/$", getAllLocations, name="getAllLocations"),
 
-	url(r"^clips/create/$", createClip, name="createClip"),
-	url(r"^clips/get/$", getClip, name="getClip"),
-	url(r"^clips/getall/$", getAllClips, name="getAllClips"),
+        url(r"^jumpgenre/create/$", createStyle, name="createStyle"),
+        url(r"^jumpgenre/get/$", getStyle, name="getStyle"),
+        url(r"^jumpgenre/getall/$", getAllStyles, name="getAllStyles"),
 
-	url(r"^ws/$", wstest, name="wstest"),
-	url(r"^ws/line/$", wsline, name="wsline"),
+        url(r"^productpitch/create/$", createNoun, name="createNoun"),
+        url(r"^productpitch/get/$", getNoun, name="getNoun"),
+        url(r"^productpitch/getall/$", getAllNouns, name="getAllNouns"),
 
-	url(r"^partyquirk/create/$", createPartyQuirk, name="createPartyQuirk"),
-	url(r"^partyquirk/get/$", getPartyQuirk, name="getPartyQuirk"),
-	url(r"^partyquirk/getall/$", getAllPartyQuirks, name="getAllPartyQuirks"),
+        url(r"^partyquirks1/create/$", createQuirk, name="createQuirk"),
+        url(r"^partyquirks1/get/$", getQuirk, name="getQuirk"),
+        url(r"^partyquirks1/getall/$", getAllQuirks, name="getAllQuirks"),
 
-	url(r"^pledgebreak/create1/$", createPledgeBreak1, name="createPledgeBreak1"),
-	url(r"^pledgebreak/create2/$", createPledgeBreak2, name="createPledgeBreak2"),
-	url(r"^pledgebreak/get/$", getPledgeBreak, name="getPledgeBreak"),
-	url(r"^pledgebreak/getall/$", getAllPledgeBreaks, name="getAllPledgeBreaks")
+        url(r"^partyquirks2/create/$", createCelebrity, name="createCelebrity"),
+        url(r"^partyquirks2/get/$", getCelebrity, name="getCelebrity"),
+        url(r"^partyquirks2/getall/$", getAllCelebrities, name="getAllCelebrities"),
+
+        url(r"^ws/$", wstest, name="wstest"),
+        url(r"^ws/line/$", wsline, name="wsline")
 
 )

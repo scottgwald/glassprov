@@ -48,3 +48,38 @@ class PartyQuirk(models.Model):
 	def __str__(self):
 		return self.text
 
+
+class Location(models.Model):
+        text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+class Style(models.Model):
+        text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+class Noun(models.Model):
+        text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+class Quirk(models.Model):
+        text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+class Celebrity(models.Model):
+        text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
