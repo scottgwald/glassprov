@@ -1,13 +1,21 @@
+console.log("Loading js.js");
 var currentGame = "lines";
 var serverURL = "http://golden-ticket.media.mit.edu:8000";
-var IDlist = ["f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf","f8:8f:ca:25:06:bf"];
+var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf"];
 
+var colorLookup = {
+    "f8:8f:ca:25:06:bf": "tangerine",
+    "f8:8f:ca:24:4d:7b": "shale",
+}
 
 function select(game){
     document.getElementById(currentGame).setAttribute("class","");
     document.getElementById(game).className="active";
     currentGame = game;
 }
+
+var performerNumber = 0;
+
 function insertPerformer(uname,content,screen){
     // sanitized name
     name = uname.replace(/\s+/g, '-').toLowerCase();
@@ -24,12 +32,19 @@ function insertPerformer(uname,content,screen){
     cell3.id = name+"-screen";
     var cell4 = row.insertCell(3);
     cell4.id = name+"-id";
+    var cell5 = row.insertCell(4);
+    cell5.id = name + "-color";
 
     cell1.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:black;'>"+name+"</a>";
     cell2.innerHTML = content;
     cell3.innerHTML = screen;
-    cell4.innerHTML = IDlist.pop();
+    //cell4.innerHTML = IDlist.pop();
+    console.log("Setting performerNumber " + performerNumber + " id to " + IDlist[performerNumber]);
+    cell4.innerHTML = IDlist[performerNumber];
+    cell5.innerHTML = colorLookup[IDlist[performerNumber]];
+    $('#'+ name + "-id").hide();
     updateScreens();
+    performerNumber += 1;
 }
 function changeContent(name,content){
     var contentID = name+"-content";
@@ -83,7 +98,7 @@ function handleRequest(user){
         console.log(data.text);
         changeContent(user, data.text);
     }
-    if(currentGame="lines"){
+    if (currentGame == "lines"){
 	$.ajax({
 	    type: "GET",
 	    url: serverURL + "/api/lines/get/",
@@ -91,7 +106,8 @@ function handleRequest(user){
 	    success: success,
 	});
     }
-    if(currentGame="dinnerparty"){
+
+    if (currentGame == "dinnerparty"){
         $.ajax({
 		type: "GET",
 		    url: serverURL + "/api/dinnerparty/get/",
@@ -99,7 +115,7 @@ function handleRequest(user){
 		    success: success,
         });
     }
-    if(currentGame="jumpgenre"){
+    if (currentGame == "jumpgenre"){
         $.ajax({
                 type: "GET",
                     url: serverURL + "/api/jumpgenre/get/",
@@ -107,7 +123,7 @@ function handleRequest(user){
                     success: success,
 		    });
     }
-    if(currentGame="productpitch"){
+    if (currentGame == "productpitch"){
         $.ajax({
                 type: "GET",
                     url: serverURL + "/api/productpitch/get/",
@@ -115,7 +131,7 @@ function handleRequest(user){
                     success: success,
 		    });
     }
-    if(currentGame="partyquirks1"){
+    if (currentGame == "partyquirks1"){
         $.ajax({
                 type: "GET",
                     url: serverURL + "/api/partyquirks1/get/",
@@ -123,7 +139,7 @@ function handleRequest(user){
                     success: success,
 		    });
     }
-    if(currentGame="partyquirks2"){
+    if (currentGame == "partyquirks2"){
         $.ajax({
                 type: "GET",
                     url: serverURL + "/api/partyquirks2/get/",
