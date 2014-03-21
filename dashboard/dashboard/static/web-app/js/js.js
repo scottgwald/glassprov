@@ -105,7 +105,7 @@ function changeContent(name,content){
     var finalID = encodeURIComponent(id);
     var line = "line=" + str + "&" + "glassID=" + finalID;
 
-    ws.publish('lines:' + id, {"text": str, "glassID": id});
+    ws.publish('lines:' + id, {"text": content, "glassID": id});
 
     // $.ajax({
     //     type: "GET",
