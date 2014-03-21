@@ -577,7 +577,7 @@ def wsline(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def wsscript(request):
-	print "Sending script to Glasses"
+    print "Sending script to Glasses"
     settings.WSCONN.send(
         'glass',
         'script',
