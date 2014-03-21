@@ -8,6 +8,53 @@ var colorLookup = {
     "f8:8f:ca:24:4d:7b": "shale",
 }
 
+server = "wss://api.picar.us/wearscriptdev/ws";
+//server = 'ws://api.picar.us/wearscriptdev/ws';
+Socket = new ReconnectingWebSocket(server);
+console.log("Made the socket.");
+ws = myWearScriptConnectionFactory(Socket, function (connected) {
+  console.log('Connected: ' + connected);
+});
+
+ws.subscribe('rotation', rotate_cb);
+function rotate_cb(channel, message) {
+  angle = -parseFloat(message);
+  console.log("channel: " + channel +" message: " + message);
+  $('body').css('transform', 'rotateZ(' + angle + 'deg)');
+}
+
+function myWearScriptConnectionFactory(websocket, glassConnectedCallback) {
+  function onopen(event) {
+      console.log('opened');
+ws.subscribe('subscriptions', subscription_cb);
+      ws.subscribe('log', log_cb);
+      ws.subscribe('urlopen', urlopen_cb);
+subscription_cb();
+  }
+  var ws = new WearScriptConnection(websocket, "webapp", Math.floor(Math.random() * 100000), onopen);
+  ws.subscribeTestHandler();
+  function subscription_cb() {
+glassConnectedCallback(ws.exists('glass'));
+      // TODO(brandyn): Only do this once, then provide a button to refresh
+  }
+  function log_cb(channel, message) {
+      console.log(channel + ': ' + message);
+      // TODO(brandyn): Have a notification that a log message was sent
+  }
+  function gist_modify_cb(channel, gists) {
+      HACK_GIST_MODIFIED = gists;
+      console.log('Gist modified');
+  }
+  function gist_get_cb(channel, gist) {
+      window.HACK_GIST = gist;
+      console.log(channel + ': ' + gist);
+  }
+  function urlopen_cb(channel, url) {
+      window.open(url);
+  }
+  return ws;
+}
+
 function select(game){
     document.getElementById(currentGame).setAttribute("class","");
     document.getElementById(game).className="active";
@@ -56,13 +103,15 @@ function changeContent(name,content){
     var finalID = encodeURIComponent(id);
     var line = "line=" + str + "&" + "glassID=" + finalID;
 
-    $.ajax({
-        type: "GET",
-        url: serverURL + "/api/ws/line1/",
-        dataType: 'json',
-        success: success,
-        data: line
-    });
+    ws.publish('lines:f8:8f:ca:25:06:bf', {"text": "I'm in love", "glassID": "f8:8f:ca:25:06:bf"});
+
+    // $.ajax({
+    //     type: "GET",
+    //     url: serverURL + "/api/ws/line1/",
+    //     dataType: 'json',
+    //     success: success,
+    //     data: line
+    // });
 
 
     //    $.ajax({
@@ -93,6 +142,7 @@ function deletePerformer(name){
 }
 
 function handleRequest(user){
+
     success = function(data) {
         console.log("Success!");
         console.log(data.text);

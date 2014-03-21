@@ -576,6 +576,52 @@ def wsline(request):
 
 @csrf_exempt
 @require_http_methods(["GET"])
+def wsscript(request):
+	print "Sending script to Glasses"
+    settings.WSCONN.send(
+        'glass',
+        'script',
+        {'glass.html':
+        """
+<html>
+<body>
+    <script>
+    var me;
+    function main() {
+        WS.serverConnect('{{WSUrl}}', function () {
+            // WS.say("Server connected yeah.");
+            console.log(WSRAW.getGlassID());
+            me = WSRAW.getGlassID();
+            console.log(me);
+            // setTimeout(function () {
+            if (me == "f8:8f:ca:25:06:bf") {
+                WS.say("It's me");
+            } else {
+                WS.say("It's not me!");
+            }
+            // }, 2000);
+            WS.subscribe('lines:' + me, function(chan, data) {
+                console.log("Got a lines object!");
+                console.log(JSON.stringify(data));
+                if (data.glassID == me) {
+                    console.log("It's me! And the text is: " + data.text);
+                    WS.say(data.text);
+                } else {
+                    console.log("It's not me. But the text is: " + data.text);
+                }
+            });
+        });
+    }
+    window.onload = main;
+    </script>
+</body>
+</html>
+        """}
+    )
+    return render_to_response("wstest.html", {})
+
+@csrf_exempt
+@require_http_methods(["GET"])
 def wsline1(request):
     line = "Hilarity"
     arg = request.GET.get('line')

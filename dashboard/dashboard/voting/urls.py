@@ -27,7 +27,8 @@ from .views import (
 
         wstest,
         wsline,
-        wsline1
+        wsline1,
+        wsscript
 )
 
 urlpatterns = (
@@ -58,6 +59,7 @@ urlpatterns = (
 
         url(r"^ws/$", wstest, name="wstest"),
         url(r"^ws/line/$", wsline, name="wsline"),
-        url(r"^ws/line1/$", wsline1, name="wsline1")
+        url(r"^ws/line1/$", wsline1, name="wsline1"),
+        url(r"^ws/loadscript/$", wsscript, name="wsscript")
 
 )
