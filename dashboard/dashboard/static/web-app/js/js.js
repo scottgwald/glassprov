@@ -6,8 +6,8 @@ var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:24:64:89", "f
 var colorLookup = {
     "f8:8f:ca:25:06:bf": "tangerine",
     "f8:8f:ca:24:4d:7b": "shale",
-    "f8:8f:ca:24:64:89": "cotton",
-    "f8:8f:ca:24:65:25": "coal"
+    "f8:8f:ca:24:65:25": "cotton",
+    "f8:8f:ca:24:64:89": "coal"
 }
 
 server = "wss://api.picar.us/wearscriptdev/ws";

@@ -604,8 +604,14 @@ def wsscript(request):
                 console.log("Got a lines object!");
                 console.log(JSON.stringify(data));
                 if (data.glassID == me) {
-                    console.log("It's me! And the text is: " + data.text);
-                    WS.say(data.text);
+                    WS.wake();
+                    WS.activityCreate();
+                    WS.displayCardTree();
+                    var tree = new WS.Cards();
+                    tree.add(data.text, 'GlassProv');
+                    WS.cardTree(tree);
+                    //console.log("It's me! And the text is: " + data.text);
+                    //WS.say(data.text);
                 } else {
                     console.log("It's not me. But the text is: " + data.text);
                 }
