@@ -6,6 +6,8 @@ var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:25:06:bf", "f
 var colorLookup = {
     "f8:8f:ca:25:06:bf": "tangerine",
     "f8:8f:ca:24:4d:7b": "shale",
+    "f8:8f:ca:24:64:89": "cotton",
+    "f8:8f:ca:24:65:25": "coal"
 }
 
 server = "wss://api.picar.us/wearscriptdev/ws";
@@ -103,7 +105,7 @@ function changeContent(name,content){
     var finalID = encodeURIComponent(id);
     var line = "line=" + str + "&" + "glassID=" + finalID;
 
-    ws.publish('lines:f8:8f:ca:25:06:bf', {"text": "I'm in love", "glassID": "f8:8f:ca:25:06:bf"});
+    ws.publish('lines:' + id, {"text": str, "glassID": id});
 
     // $.ajax({
     //     type: "GET",
