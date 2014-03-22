@@ -61,6 +61,26 @@ function select(game){
     document.getElementById(currentGame).setAttribute("class","");
     document.getElementById(game).className="active";
     currentGame = game;
+   
+    if(currentGame=="lines"){
+	var textToDisplay = "Lines From a Hat";
+    }
+    if(currentGame=="dinnerparty"){
+	var textToDisplay = "Dinner Pary";
+    }
+    if(currentGame=="jumpgenre"){
+	var textToDisplay = "Jump Genre";
+    }
+    if(currentGame=="productpitch"){
+	var textToDisplay = "Product Pitch";
+    }
+    if(currentGame=="partyquirks1"){
+	var textToDisplay = "Party Quirks 1";
+    }
+    if(currentGame=="partyquirks2"){
+	var textToDisplay = "Party Quirks 1";
+    }
+    document.getElementById("whichgame").innerHTML = "Current Game: " + textToDisplay;
 }
 
 var performerNumber = 0;
