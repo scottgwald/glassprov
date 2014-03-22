@@ -84,20 +84,20 @@ function insertPerformer(uname,content,screen){
     var cell5 = row.insertCell(4);
     cell5.id = name + "-color";
 
-    cell1.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:black;'>"+name+"</a>";
-    cell2.innerHTML = content;
-    cell3.innerHTML = screen;
+    cell1.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+name+"</a>";
+    cell2.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>";
+    cell3.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+screen+"</a>";
     //cell4.innerHTML = IDlist.pop();
     console.log("Setting performerNumber " + performerNumber + " id to " + IDlist[performerNumber]);
-    cell4.innerHTML = IDlist[performerNumber];
-    cell5.innerHTML = colorLookup[IDlist[performerNumber]];
+    cell4.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+IDlist[performerNumber]+"</a>";
+    cell5.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+colorLookup[IDlist[performerNumber]]+"</a>";
     $('#'+ name + "-id").hide();
     updateScreens();
     performerNumber += 1;
 }
 function changeContent(name,content){
     var contentID = name+"-content";
-    document.getElementById(contentID).innerHTML = content;
+    document.getElementById(contentID).innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>";
 
     var str = encodeURIComponent(content);
     var tempID = name+"-id";
