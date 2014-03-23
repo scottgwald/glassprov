@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Line, Emotion, Clip, PledgeBreak1, PledgeBreak2, PartyQuirk, Location, Style, Noun, Quirk, Celebrity
+from .models import Line, Emotion, Clip, PledgeBreak1, PartyQuirk, PartyQuirk2, Location
+# , Location, Style, Noun, Quirk, Celebrity
 
 import random
 from django.views.decorators.http import require_http_methods
@@ -679,6 +680,33 @@ def getAllPartyQuirks(request):
     # WS: send to dashboard
     return HttpResponse(serialize(data), content_type="application/json")
 
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createPartyQuirk2(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk2.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getPartyQuirk2(request):
+    line = PartyQuirk2.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text, "glassid":request.GET["glassid"]}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getAllPartyQuirks2(request):
+    data = PartyQuirk2.objects.all()
+    # WS: send to dashboard
+    return HttpResponse(serialize(data), content_type="application/json")
+
 # lines in a hat
 
 @csrf_exempt
@@ -688,28 +716,21 @@ def createPledgeBreak1(request):
     data = PledgeBreak1.objects.create(text=text)
     data.save()
     return HttpResponse(serialize(data), content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["POST"])
-def createPledgeBreak2(request):
-    text = json.loads(request.body)['text']
-    data = PledgeBreak2.objects.create(text=text)
-    data.save()
-    return HttpResponse(serialize(data), content_type="application/json")    
+ 
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getPledgeBreak(request):
-    line = PledgeBreak1.objects.filter(timestamp=None, id=request.GET["id1"])[0]
+    line = PledgeBreak1.objects.filter(timestamp=None)[random.randint(0, PledgeBreak1.objects.filter(timestamp=None).count() - 1)]
     text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
 
-    line2 = PledgeBreak2.objects.filter(timestamp=None, id=request.GET["id2"])[0]
+    line2 = PledgeBreak1.objects.filter(timestamp=None)[random.randint(0, PledgeBreak1.objects.filter(timestamp=None).count() - 1)]
     text2 = line2.text
 
-    line.timestamp = datetime.datetime.now()
     line2.timestamp = datetime.datetime.now()
 
-    line.save()
     line2.save()
 
     data = {"text":text, "text2":text2, "glassid":request.GET["glassid"]}
@@ -720,7 +741,7 @@ def getPledgeBreak(request):
 @require_http_methods(["GET"])
 def getAllPledgeBreaks(request):
     pb1 = PledgeBreak1.objects.filter(timestamp=None)
-    pb2 = PledgeBreak2.objects.filter(timestamp=None)
+    pb2 = PledgeBreak1.objects.filter(timestamp=None)
 
     data = {"pb1": pb1, "pb2": pb2}
     # WS send to dashboard here
@@ -728,157 +749,21 @@ def getAllPledgeBreaks(request):
 
 
 
-
-
-
-
-
-
-# NEW STUFF
+@csrf_exempt
+@require_http_methods(["GET"])
+def getLocation(request):
+    line = Location.objects.filter(timestamp=None)[random.randint(0, Location.objects.filter(timestamp=None).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text, "glassid":request.GET["glassid"]}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["POST"])
 def createLocation(request):
     text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
+    data = Location.objects.create(text=text)
     data.save()
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getLocation(request):
-    line = PartyQuirk.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
-    text = line.text
-    line.timestamp = datetime.datetime.now()
-    line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
-    # WS send to request.GET["glassid"] glass and dashboard here                                                                                                                   
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getAllLocations(request):
-    data = PartyQuirk.objects.all()
-    # WS: send to dashboard                                                                                                                                                          
-    return HttpResponse("{}", content_type="application/json")
-
-
-
-@csrf_exempt
-@require_http_methods(["POST"])
-def createStyle(request):
-    text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
-    data.save()
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getStyle(request):
-    line = PartyQuirk.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
-    text = line.text
-    line.timestamp = datetime.datetime.now()
-    line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
-    # WS send to request.GET["glassid"] glass and dashboard here                                                                                                                    
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getAllStyles(request):
-    data = PartyQuirk.objects.all()
-    # WS: send to dashboard                                    
-    return HttpResponse("{}", content_type="application/json")
-
-
-
-
-@csrf_exempt
-@require_http_methods(["POST"])
-def createNoun(request):
-    text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
-    data.save()
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getNoun(request):
-    line = PartyQuirk.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
-    text = line.text
-    line.timestamp = datetime.datetime.now()
-    line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
-    # WS send to request.GET["glassid"] glass and dashboard here                                                                                                                    
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getAllNouns(request):
-    data = PartyQuirk.objects.all()
-    # WS: send to dashboard                                                                                                                           
-                                                                                                                              
-    return HttpResponse("{}", content_type="application/json")
-
-
-
-
-
-
-@csrf_exempt
-@require_http_methods(["POST"])
-def createQuirk(request):
-    text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
-    data.save()
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getQuirk(request):
-    line = PartyQuirk.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
-    text = line.text
-    line.timestamp = datetime.datetime.now()
-    line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
-    # WS send to request.GET["glassid"] glass and dashboard here                                                                                                                     
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getAllQuirks(request):
-    data = PartyQuirk.objects.all()
-    # WS: send to dashboard                                                                                                                                                         \
-                                                                                                                                                                                     
-    return HttpResponse("{}", content_type="application/json")
-
-
-
-
-
-@csrf_exempt
-@require_http_methods(["POST"])
-def createCelebrity(request):
-    text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
-    data.save()
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getCelebrity(request):
-    line = PartyQuirk.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
-    text = line.text
-    line.timestamp = datetime.datetime.now()
-    line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
-    # WS send to request.GET["glassid"] glass and dashboard here                                                                                                                     
-    return HttpResponse("{}", content_type="application/json")
-
-@csrf_exempt
-@require_http_methods(["GET"])
-def getAllCelebrities(request):
-    data = PartyQuirk.objects.all()
-    # WS: send to dashboard                                                                                                                                                         \
-                                                                                                                                                                                     
-    return HttpResponse("{}", content_type="application/json")
+    return HttpResponse(serialize(data), content_type="application/json")

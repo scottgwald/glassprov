@@ -34,13 +34,6 @@ class PledgeBreak1(models.Model):
 	def __str__(self):
 		return self.text
 
-class PledgeBreak2(models.Model):
-	text = models.CharField(max_length=140)
-	timestamp = models.DateTimeField(default=None, null=True)
-
-	def __str__(self):
-		return self.text
-
 class PartyQuirk(models.Model):
 	text = models.CharField(max_length=140)
 	timestamp = models.DateTimeField(default=None, null=True)
@@ -48,37 +41,16 @@ class PartyQuirk(models.Model):
 	def __str__(self):
 		return self.text
 
-
 class Location(models.Model):
-        text = models.CharField(max_length=140)
-	timestamp = models.DateTimeField(default=None, null=True)
+    text = models.CharField(max_length=140)
+    timestamp = models.DateTimeField(default=None, null=True)
 
-	def __str__(self):
-		return self.text
+    def __str__(self):
+    	return self.text
 
-class Style(models.Model):
-        text = models.CharField(max_length=140)
-	timestamp = models.DateTimeField(default=None, null=True)
 
-	def __str__(self):
-		return self.text
-
-class Noun(models.Model):
-        text = models.CharField(max_length=140)
-	timestamp = models.DateTimeField(default=None, null=True)
-
-	def __str__(self):
-		return self.text
-
-class Quirk(models.Model):
-        text = models.CharField(max_length=140)
-	timestamp = models.DateTimeField(default=None, null=True)
-
-	def __str__(self):
-		return self.text
-
-class Celebrity(models.Model):
-        text = models.CharField(max_length=140)
+class PartyQuirk2(models.Model):
+	text = models.CharField(max_length=140)
 	timestamp = models.DateTimeField(default=None, null=True)
 
 	def __str__(self):
