@@ -9,16 +9,23 @@ var colorLookup = {
     "f8:8f:ca:24:65:25": "cotton",
     "f8:8f:ca:24:64:89": "coal"
 }
-
-server = "wss://api.picar.us/wearscriptdev/ws";
-//server = 'ws://api.picar.us/wearscriptdev/ws';
-Socket = new ReconnectingWebSocket(server);
-console.log("Made the socket.");
-ws = myWearScriptConnectionFactory(Socket, function (connected) {
-  console.log('Connected: ' + connected);
+$.ajax({
+    type: "GET",
+    url: "/ws/get",
+    dataType: 'json',
+    success: wssuccess
 });
-
-ws.subscribe('rotation', rotate_cb);
+wssuccess = function(data){
+    server = data.wsurl;
+    console.log("url " + server);
+    //server = 'ws://api.picar.us/wearscriptdev/ws';
+    Socket = new ReconnectingWebSocket(server);
+    console.log("Made the socket.");
+    ws = myWearScriptConnectionFactory(Socket, function (connected) {
+      console.log('Connected: ' + connected);
+    });
+    ws.subscribe('rotation', rotate_cb);
+}
 function rotate_cb(channel, message) {
   angle = -parseFloat(message);
   console.log("channel: " + channel +" message: " + message);
@@ -28,10 +35,10 @@ function rotate_cb(channel, message) {
 function myWearScriptConnectionFactory(websocket, glassConnectedCallback) {
   function onopen(event) {
       console.log('opened');
-ws.subscribe('subscriptions', subscription_cb);
+      ws.subscribe('subscriptions', subscription_cb);
       ws.subscribe('log', log_cb);
       ws.subscribe('urlopen', urlopen_cb);
-subscription_cb();
+      subscription_cb();
   }
   var ws = new WearScriptConnection(websocket, "webapp", Math.floor(Math.random() * 100000), onopen);
   ws.subscribeTestHandler();
@@ -63,22 +70,22 @@ function select(game){
     currentGame = game;
    
     if(currentGame=="lines"){
-	var textToDisplay = "Lines From a Hat";
+        var textToDisplay = "Lines From a Hat";
     }
     if(currentGame=="dinnerparty"){
-	var textToDisplay = "Dinner Pary";
+        var textToDisplay = "Dinner Pary";
     }
     if(currentGame=="jumpgenre"){
-	var textToDisplay = "Jump Genre";
+        var textToDisplay = "Jump Genre";
     }
     if(currentGame=="productpitch"){
-	var textToDisplay = "Product Pitch";
+        var textToDisplay = "Product Pitch";
     }
     if(currentGame=="partyquirks1"){
-	var textToDisplay = "Party Quirks 1";
+        var textToDisplay = "Party Quirks 1";
     }
     if(currentGame=="partyquirks2"){
-	var textToDisplay = "Party Quirks 1";
+        var textToDisplay = "Party Quirks 1";
     }
     document.getElementById("whichgame").innerHTML = "Current Game: " + textToDisplay;
 }
@@ -171,53 +178,53 @@ function handleRequest(user){
         changeContent(user, data.text);
     }
     if (currentGame == "lines"){
-	$.ajax({
-	    type: "GET",
-	    url: "/api/lines/get/",
-	    dataType: 'json',
-	    success: success,
-	});
+        $.ajax({
+            type: "GET",
+            url: "/api/lines/get/",
+            dataType: 'json',
+            success: success,
+        });
     }
 
     if (currentGame == "dinnerparty"){
         $.ajax({
-		type: "GET",
-		    url: "/api/dinnerparty/get/",
-		    dataType: 'json',
-		    success: success,
+            type: "GET",
+            url: "/api/dinnerparty/get/",
+            dataType: 'json',
+            success: success,
         });
     }
     if (currentGame == "jumpgenre"){
         $.ajax({
-                type: "GET",
-                    url: "/api/jumpgenre/get/",
-                    dataType: 'json',
-                    success: success,
-		    });
+            type: "GET",
+            url: "/api/jumpgenre/get/",
+            dataType: 'json',
+            success: success,
+        });
     }
     if (currentGame == "productpitch"){
         $.ajax({
-                type: "GET",
-                    url: "/api/productpitch/get/",
-                    dataType: 'json',
-                    success: success,
-		    });
+            type: "GET",
+            url: "/api/productpitch/get/",
+            dataType: 'json',
+            success: success,
+        });
     }
     if (currentGame == "partyquirks1"){
         $.ajax({
-                type: "GET",
-                    url: "/api/partyquirks1/get/",
-                    dataType: 'json',
-                    success: success,
-		    });
+            type: "GET",
+            url: "/api/partyquirks1/get/",
+            dataType: 'json',
+            success: success,
+        });
     }
     if (currentGame == "partyquirks2"){
         $.ajax({
-                type: "GET",
-                    url: "/api/partyquirks2/get/",
-                    dataType: 'json',
-                    success: success,
-		    });
+            type: "GET",
+            url: "/api/partyquirks2/get/",
+            dataType: 'json',
+            success: success,
+        });
     }
 
 
