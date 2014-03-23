@@ -1,5 +1,4 @@
 $(document).ready(function(){
-	var server = "http://golden-ticket.media.mit.edu:8000";
 
 	var lines = function(response){
 		$("#linesdiv").append("<br>"+response["text"]);

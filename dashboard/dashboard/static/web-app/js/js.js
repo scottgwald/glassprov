@@ -1,6 +1,6 @@
 console.log("Loading js.js");
 var currentGame = "lines";
-var serverURL = "http://golden-ticket.media.mit.edu:8000";
+
 var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf"];
 
 var colorLookup = {
@@ -173,7 +173,7 @@ function handleRequest(user){
     if (currentGame == "lines"){
 	$.ajax({
 	    type: "GET",
-	    url: serverURL + "/api/lines/get/",
+	    url: "/api/lines/get/",
 	    dataType: 'json',
 	    success: success,
 	});
@@ -182,7 +182,7 @@ function handleRequest(user){
     if (currentGame == "dinnerparty"){
         $.ajax({
 		type: "GET",
-		    url: serverURL + "/api/dinnerparty/get/",
+		    url: "/api/dinnerparty/get/",
 		    dataType: 'json',
 		    success: success,
         });
@@ -190,7 +190,7 @@ function handleRequest(user){
     if (currentGame == "jumpgenre"){
         $.ajax({
                 type: "GET",
-                    url: serverURL + "/api/jumpgenre/get/",
+                    url: "/api/jumpgenre/get/",
                     dataType: 'json',
                     success: success,
 		    });
@@ -198,7 +198,7 @@ function handleRequest(user){
     if (currentGame == "productpitch"){
         $.ajax({
                 type: "GET",
-                    url: serverURL + "/api/productpitch/get/",
+                    url: "/api/productpitch/get/",
                     dataType: 'json',
                     success: success,
 		    });
@@ -206,7 +206,7 @@ function handleRequest(user){
     if (currentGame == "partyquirks1"){
         $.ajax({
                 type: "GET",
-                    url: serverURL + "/api/partyquirks1/get/",
+                    url: "/api/partyquirks1/get/",
                     dataType: 'json',
                     success: success,
 		    });
@@ -214,7 +214,7 @@ function handleRequest(user){
     if (currentGame == "partyquirks2"){
         $.ajax({
                 type: "GET",
-                    url: serverURL + "/api/partyquirks2/get/",
+                    url: "/api/partyquirks2/get/",
                     dataType: 'json',
                     success: success,
 		    });

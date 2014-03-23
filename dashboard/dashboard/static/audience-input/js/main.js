@@ -1,5 +1,3 @@
-var serverURL = "http://golden-ticket.media.mit.edu:8000";
-
 var results = new Array();
 var imgs = new Array();
 
@@ -37,7 +35,7 @@ function handleInput(){
     if(title=="Lines From a Hat"){
       $.ajax({
         type: "POST",
-        url: serverURL + "/api/lines/create/",
+        url: "/api/lines/create/",
         data: textString,
         contentType: "application/json",
         dataType: 'json',
@@ -47,7 +45,7 @@ function handleInput(){
     if(title=="Dinner Party"){ 
       $.ajax({
         type: "POST",
-        url: serverURL+"/api/dinnerparty/create/",
+        url: "/api/dinnerparty/create/",
         data: textString,
         dataType: 'json',
         success: success,
@@ -57,7 +55,7 @@ function handleInput(){
     if(title=="Jump Genre"){
 	$.ajax({
 		type: "POST",
-		    url: serverURL+"/api/jumpgenre/create/",
+		    url: "/api/jumpgenre/create/",
 		    data: textString,
 		    dataType: 'json',
 		    success: success,
@@ -67,7 +65,7 @@ function handleInput(){
     if(title=="Product Pitch"){
 	$.ajax({
 		type: "POST",
-		    url: serverURL+"/api/productpitch/create/",
+		    url: "/api/productpitch/create/",
 		    data: textString,
 		    dataType: 'json',
 		    success: success,
@@ -77,7 +75,7 @@ function handleInput(){
     if(title=="Party Quirks 1"){
 	$.ajax({
 		type: "POST",
-		    url: serverURL+"/api/partyquirks1/create/",
+		    url: "/api/partyquirks1/create/",
 		    data: textString,
 		    dataType: 'json',
 		    success: success,
@@ -87,7 +85,7 @@ function handleInput(){
     if(title=="Party Quirks 2"){
 	$.ajax({
 		type: "POST",
-		    url: serverURL+"/api/partyquirks2/create/",
+		    url: "/api/partyquirks2/create/",
 		    data: textString,
 		    dataType: 'json',
 		    success: success,
@@ -145,7 +143,7 @@ function processNewsroom(){
 
       $.ajax({
         type: "POST",
-        url: serverURL+"/api/clips/create/",
+        url: "/api/clips/create/",
         data: postArray,
         dataType: 'json',
         success: success,
