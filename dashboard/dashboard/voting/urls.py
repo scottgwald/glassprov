@@ -25,10 +25,11 @@ from .views import (
         createPartyQuirk2,
         getPartyQuirk2,
         getAllPartyQuirks2,
+
+        createPartyQuirk3,
+        getPartyQuirk3,
+        getAllPartyQuirks3,
         
-        createCelebrity,
-        getCelebrity,
-        getAllCelebrities,
 
         wstest,
         wsline,
@@ -61,6 +62,10 @@ urlpatterns = (
         url(r"^partyquirks2/create/$", createPartyQuirk2, name="createCelebrity"),
         url(r"^partyquirks2/get/$", getPartyQuirk2, name="getCelebrity"),
         url(r"^partyquirks2/getall/$", getAllPartyQuirks2, name="getAllCelebrities"),
+
+        url(r"^partyquirks3/create/$", createPartyQuirk3, name="createQuirk3"),
+        url(r"^partyquirks3/get/$", getPartyQuirk3, name="getQuirk3"),
+        url(r"^partyquirks3/getall/$", getAllPartyQuirks3, name="getAllQuirks3"),
 
         url(r"^slides/get/$", getSlides, name="getSlides"),
 

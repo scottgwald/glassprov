@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Line, Emotion, Clip, PledgeBreak1, PartyQuirk, PartyQuirk2, Location
+from .models import Line, Emotion, Clip, PledgeBreak1, PartyQuirk, PartyQuirk2, PartyQuirk3, Location
 # , Location, Style, Noun, Quirk, Celebrity
 
 import random
@@ -694,7 +694,7 @@ def createPartyQuirk2(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getPartyQuirk2(request):
-    line = PartyQuirk2.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
+    line = PartyQuirk2.objects.filter(timestamp=None)[random.randint(0, PartyQuirk2.objects.filter(timestamp=None).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
@@ -706,6 +706,33 @@ def getPartyQuirk2(request):
 @require_http_methods(["GET"])
 def getAllPartyQuirks2(request):
     data = PartyQuirk2.objects.all()
+    # WS: send to dashboard
+    return HttpResponse(serialize(data), content_type="application/json")
+
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createPartyQuirk3(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk3.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getPartyQuirk3(request):
+    line = PartyQuirk3.objects.filter(timestamp=None)[random.randint(0, PartyQuirk3.objects.filter(timestamp=None).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text, "glassid":request.GET["glassid"]}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getAllPartyQuirks3(request):
+    data = PartyQuirk3.objects.all()
     # WS: send to dashboard
     return HttpResponse(serialize(data), content_type="application/json")
 

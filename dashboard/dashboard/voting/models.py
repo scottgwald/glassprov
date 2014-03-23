@@ -55,3 +55,10 @@ class PartyQuirk2(models.Model):
 
 	def __str__(self):
 		return self.text
+
+class PartyQuirk3(models.Model):
+	text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
