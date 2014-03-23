@@ -7,28 +7,35 @@ from .views import (
 
 	createLocation,
         getLocation,
-        getAllLocations,
 
-        createStyle,
-        getStyle,
-        getAllStyles,
 
-        createNoun,
-        getNoun,
-        getAllNouns,
+        createEmotion,
+        getEmotion,
+        getAllEmotions,
 
-        createQuirk,
-        getQuirk,
-        getAllQuirks,
+
+        createPledgeBreak1,
+        getPledgeBreak,
+        getAllPledgeBreaks,
+
+        createPartyQuirk,
+        getPartyQuirk,
+        getAllPartyQuirks,
+
+        createPartyQuirk2,
+        getPartyQuirk2,
+        getAllPartyQuirks2,
+
+        createPartyQuirk3,
+        getPartyQuirk3,
+        getAllPartyQuirks3,
         
-        createCelebrity,
-        getCelebrity,
-        getAllCelebrities,
 
         wstest,
         wsline,
         wsline1,
-        wsscript
+        wsscript,
+        getSlides
 )
 
 urlpatterns = (
@@ -39,23 +46,28 @@ urlpatterns = (
 
         url(r"^dinnerparty/create/$", createLocation, name="createLocation"),
         url(r"^dinnerparty/get/$", getLocation, name="getLocation"),
-        url(r"^dinnerparty/getall/$", getAllLocations, name="getAllLocations"),
 
-        url(r"^jumpgenre/create/$", createStyle, name="createStyle"),
-        url(r"^jumpgenre/get/$", getStyle, name="getStyle"),
-        url(r"^jumpgenre/getall/$", getAllStyles, name="getAllStyles"),
+        url(r"^jumpgenre/create/$", createEmotion, name="createStyle"),
+        url(r"^jumpgenre/get/$", getEmotion, name="getStyle"),
+        url(r"^jumpgenre/getall/$", getAllEmotions, name="getAllStyles"),
 
-        url(r"^productpitch/create/$", createNoun, name="createNoun"),
-        url(r"^productpitch/get/$", getNoun, name="getNoun"),
-        url(r"^productpitch/getall/$", getAllNouns, name="getAllNouns"),
+        url(r"^productpitch/create/$", createPledgeBreak1, name="createNoun"),
+        url(r"^productpitch/get/$", getPledgeBreak, name="getNoun"),
+        url(r"^productpitch/getall/$", getAllPledgeBreaks, name="getAllNouns"),
 
-        url(r"^partyquirks1/create/$", createQuirk, name="createQuirk"),
-        url(r"^partyquirks1/get/$", getQuirk, name="getQuirk"),
-        url(r"^partyquirks1/getall/$", getAllQuirks, name="getAllQuirks"),
+        url(r"^partyquirks1/create/$", createPartyQuirk, name="createQuirk"),
+        url(r"^partyquirks1/get/$", getPartyQuirk, name="getQuirk"),
+        url(r"^partyquirks1/getall/$", getAllPartyQuirks, name="getAllQuirks"),
 
-        url(r"^partyquirks2/create/$", createCelebrity, name="createCelebrity"),
-        url(r"^partyquirks2/get/$", getCelebrity, name="getCelebrity"),
-        url(r"^partyquirks2/getall/$", getAllCelebrities, name="getAllCelebrities"),
+        url(r"^partyquirks2/create/$", createPartyQuirk2, name="createCelebrity"),
+        url(r"^partyquirks2/get/$", getPartyQuirk2, name="getCelebrity"),
+        url(r"^partyquirks2/getall/$", getAllPartyQuirks2, name="getAllCelebrities"),
+
+        url(r"^partyquirks3/create/$", createPartyQuirk3, name="createQuirk3"),
+        url(r"^partyquirks3/get/$", getPartyQuirk3, name="getQuirk3"),
+        url(r"^partyquirks3/getall/$", getAllPartyQuirks3, name="getAllQuirks3"),
+
+        url(r"^slides/get/$", getSlides, name="getSlides"),
 
         url(r"^ws/$", wstest, name="wstest"),
         url(r"^ws/line/$", wsline, name="wsline"),
