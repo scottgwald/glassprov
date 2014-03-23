@@ -51,6 +51,7 @@
         // update user name
         var quadrant = message.glass-1;
         document.getElementsByClassName("user")[quadrant].innerHTML=message.user;
+        document.getElementsByClassName("audience-name")[quadrand].innerHTML="Submitted By: "+message.audience;
         if(message.command=="showline"){
           document.getElementsByClassName("text")[quadrant].innerHTML=message.line;
           $('text').textfill({ maxFontPixels: 75 });
@@ -168,9 +169,8 @@
  </video> -->
 
   <div id="q1" class="container q1" style="width:50%; height:50%; float:left">
-    <div class="user">
-
-    </div>
+    <div class="user"></div>
+    <div class="audience-name"></div>
     <div class="text-container">
       <div class="text">
         <span></span>
@@ -179,9 +179,8 @@
   </div>
 
   <div id="q2" class="container q2" style="width:50%; height:50%; float:right">
-    <div class="user">
-
-    </div>
+    <div class="user"></div>
+    <div class="audience-name"></div>
     <div class="text-container">
       <div class="text">
         <span></span>
@@ -190,9 +189,8 @@
   </div>
 
   <div id="q3" class="container q3" style="width:50%; height:50%; float:left">
-    <div class="user">
-
-    </div>
+    <div class="user"></div>
+    <div class="audience-name"></div>
     <div class="text-container">
       <div class="text">
         <span></span>
@@ -201,22 +199,20 @@
   </div>
 
   <div id="q4" class="container q4" style="width:50%; height:50%; float:right">
-    <div class="user">
-
-    </div>
+    <div class="user">Kevin</div>
+    <div class="audience-name">Joe</div>
     <div class="text-container">
       <div class="text">
-        <span></span>
+        <span>Hi</span>
       </div>
     </div>
   </div>
   <div id="q5" style="width:100%;height:100%;position:relative;z-index:100;float:right;" class="container q5">
-    <div class="user">
-    
-    </div>
+    <div class="user">Test</div>
+    <div class="audience-name">Test</div>
     <div class="text-container">
       <div class="text">
-	<span></span>
+	<span>Test</span>
       </div>
     </div>
 
