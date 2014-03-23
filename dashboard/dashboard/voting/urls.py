@@ -35,6 +35,7 @@ from .views import (
         wsline,
         wsline1,
         wsscript,
+        wsgeturl,
         getSlides
 )
 
@@ -70,6 +71,7 @@ urlpatterns = (
         url(r"^slides/get/$", getSlides, name="getSlides"),
 
         url(r"^ws/$", wstest, name="wstest"),
+        url(r"^ws/get/$", wsgeturl, name="wsgeturl"),
         url(r"^ws/line/$", wsline, name="wsline"),
         url(r"^ws/line1/$", wsline1, name="wsline1"),
         url(r"^ws/loadscript/$", wsscript, name="wsscript")

@@ -806,3 +806,11 @@ def getSlides(request):
     data = {"slides": slides}
     # WS send to dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def wsgeturl(request):
+    data = {"wsurl": "wss://localhost:8001/ws"}
+    # WS send to dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
