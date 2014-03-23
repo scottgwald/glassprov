@@ -17,12 +17,13 @@ function handleInput(){
   var inp = document.getElementsByClassName("txt")[counter].value;
   
   if(inp!=''){
+    var userName = document.getElementById("name-field").value;console.log("User: "+userName);
     document.getElementsByClassName("txt")[counter].value ='';
     var title = document.getElementsByClassName("title")[counter].innerHTML; 
     results.push([title,inp]);
-
-    var textJson = {"text": inp};
-    var textString = JSON.stringify(textJson);
+   
+    var dataObj = {"text":inp, "audience":userName};
+    var dataString = JSON.stringify(dataObj);
     // send results to server here
     var success = function() {
       console.log("Submitted line: " + textString);
@@ -36,7 +37,7 @@ function handleInput(){
       $.ajax({
         type: "POST",
         url: "/api/lines/create/",
-        data: textString,
+        data: dataString,
         contentType: "application/json",
         dataType: 'json',
         success: success,
@@ -46,7 +47,7 @@ function handleInput(){
       $.ajax({
         type: "POST",
         url: "/api/dinnerparty/create/",
-        data: textString,
+        data: dataString,
         dataType: 'json',
         success: success,
         dataType: dataType
@@ -56,7 +57,7 @@ function handleInput(){
 	$.ajax({
 		type: "POST",
 		    url: "/api/jumpgenre/create/",
-		    data: textString,
+		    data: dataString,
 		    dataType: 'json',
 		    success: success,
 		    dataType: dataType
@@ -66,7 +67,7 @@ function handleInput(){
 	$.ajax({
 		type: "POST",
 		    url: "/api/productpitch/create/",
-		    data: textString,
+		    data: dataString,
 		    dataType: 'json',
 		    success: success,
 		    dataType: dataType
@@ -76,7 +77,7 @@ function handleInput(){
 	$.ajax({
 		type: "POST",
 		    url: "/api/partyquirks1/create/",
-		    data: textString,
+		    data: dataString,
 		    dataType: 'json',
 		    success: success,
 		    dataType: dataType
@@ -86,14 +87,12 @@ function handleInput(){
 	$.ajax({
 		type: "POST",
 		    url: "/api/partyquirks2/create/",
-		    data: textString,
+		    data: dataString,
 		    dataType: 'json',
 		    success: success,
 		    dataType: dataType
 		    });
     }
-
-
   } 
 }
  

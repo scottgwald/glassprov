@@ -28,7 +28,7 @@
             });
         });
         $("body").css("overflow", "hidden");
-        document.getElementsByClassName("txt")[0].focus();
+        document.getElementById("name-field").focus();
         window.addEventListener('keyup', function (e) {
           if (e.keyCode === 38) { // up arrow
             // if(document.activeElement.value!=undefined){
@@ -84,6 +84,7 @@
             <li><a href="#">About</a></li> <!--about.html-->
             <li><a href="#">Contact</a></li> <!--contact.html-->
           </ul>
+	  <input type="text" placeholder="Name" class="form-control" style="margin-top:8px;width:20%;float:right;" id="name-field"></input>
         </div><!--/.nav-collapse -->
       </div>
     </div>
