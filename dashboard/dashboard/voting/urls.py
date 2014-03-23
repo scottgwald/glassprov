@@ -33,7 +33,8 @@ from .views import (
         wstest,
         wsline,
         wsline1,
-        wsscript
+        wsscript,
+        getSlides
 )
 
 urlpatterns = (
@@ -60,6 +61,8 @@ urlpatterns = (
         url(r"^partyquirks2/create/$", createPartyQuirk2, name="createCelebrity"),
         url(r"^partyquirks2/get/$", getPartyQuirk2, name="getCelebrity"),
         url(r"^partyquirks2/getall/$", getAllPartyQuirks2, name="getAllCelebrities"),
+
+        url(r"^slides/get/$", getSlides, name="getSlides"),
 
         url(r"^ws/$", wstest, name="wstest"),
         url(r"^ws/line/$", wsline, name="wsline"),

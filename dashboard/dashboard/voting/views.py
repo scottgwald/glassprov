@@ -8,8 +8,10 @@ from django.views.decorators.http import require_http_methods
 #begin serializer https://github.com/Strangemother/django-djasoner
 from io import StringIO
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 import json
 import datetime
+import os
 
 try:
 
@@ -766,4 +768,14 @@ def createLocation(request):
     text = json.loads(request.body)['text']
     data = Location.objects.create(text=text)
     data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getSlides(request):
+    path = os.path.join(settings.BASE_DIR, "static/slides")
+    slides = os.listdir(path)
+    data = {"slides": slides}
+    # WS send to dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
