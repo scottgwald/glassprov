@@ -32,8 +32,8 @@
         var lineChannels = _.map(IDlist, function(el) {return "lines:" + el});
         lineChannels.unshift("lines");
 
-        var vidChannels = _.map(IDlist, function(el){ return "video:" + el});
-        vidChannels.unshift("video");
+        var vidChannels = _.map(IDlist, function(el){ return "videos:" + el});
+        vidChannels.unshift("videos");
 
         wssuccess = function(data){
           server = data.wsurl;
@@ -91,11 +91,11 @@
           var panel = vidChannels.indexOf(channel);
           if (panel == 0) {
             for (i = 0; i < nPanels; i++ ) {
-              $("#q" + (panel + 1) + " span").html("<video autoplay preload class='video-js vjs-default-skin' preload='auto' width='500' height='280'><source src='"+ escape(message.url)+"' type='video/mp4'/> </video>");
+              $("#q" + (panel + 1) + " span").html("<video autoplay preload class='video-js vjs-default-skin' preload='auto'  style='max-height:50%;max-width:50%;'><source src='"+ escape(message.url)+"' type='video/mp4'/> </video>");
             }
             //send to all
           } else {
-            $("#q" + panel + " span").html("<video autoplay preload class='video-js vjs-default-skin' preload='auto' height='100%'><source src='"+ escape(message.url)+"' type='video/mp4'/> </video>");
+            $("#q" + panel + " span").html("<video autoplay preload class='video-js vjs-default-skin' preload='auto' style='max-height:50%;max-width:50%;'><source src='"+ escape(message.url)+"' type='video/mp4'/> </video>");
             // send to the specific one
           }
           // show line on panel

@@ -82,13 +82,19 @@ function myWearScriptConnectionFactory(websocket, glassConnectedCallback) {
       ws.subscribe('subscriptions', subscription_cb);
       ws.subscribe('log', log_cb);
       ws.subscribe('urlopen', urlopen_cb);
+      ws.subscribe('battery', battery_cb);
       subscription_cb();
   }
   var ws = new WearScriptConnection(websocket, "webapp", Math.floor(Math.random() * 100000), onopen);
   ws.subscribeTestHandler();
   function subscription_cb() {
-glassConnectedCallback(ws.exists('glass'));
+    glassConnectedCallback(ws.exists('glass'));
       // TODO(brandyn): Only do this once, then provide a button to refresh
+  }
+  function battery_cb(channel, message){
+    var id = message.glassID; 
+    var level = message.level;
+    $("#"+id+"-battery a").html(level);
   }
   function log_cb(channel, message) {
       console.log(channel + ': ' + message);
@@ -168,6 +174,8 @@ function insertPerformer(uname,content,screen){
     cell4.id = name+"-id";
     var cell5 = row.insertCell(4);
     cell5.id = name + "-color";
+    var cell6 = row.insertCell(5);
+    cell6.id = IDlist[performerNumber] + "-battery";
 
     cell1.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+name+"</a>";
     cell2.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>";
@@ -176,6 +184,8 @@ function insertPerformer(uname,content,screen){
     console.log("Setting performerNumber " + performerNumber + " id to " + IDlist[performerNumber]);
     cell4.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+IDlist[performerNumber]+"</a>";
     cell5.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+colorLookup[IDlist[performerNumber]]+"</a>";
+    cell6.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>?</a>";
+    
     $('#'+ name + "-id").hide();
     updateScreens();
     performerNumber += 1;
@@ -209,7 +219,7 @@ function changeContentVideo(name,content){
     var tempID = name+"-id";
     var id = $("#"+tempID+" a").html();
     console.log("change content for "+id);
-    ws.publish('video:' + id, {"url": content, "glassID": id});
+    ws.publish('videos:' + id, {"url": content, "glassID": id});
 
     console.log("Content: " + str + "  Sent");
 

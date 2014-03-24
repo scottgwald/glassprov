@@ -603,22 +603,41 @@ def wsscript(request):
                 WS.say("It's not me!");
             }
             // }, 2000);
-            WS.subscribe('lines:' + me, function(chan, data) {
-                console.log("Got a lines object!");
-                console.log(JSON.stringify(data));
-                if (data.glassID == me) {
-                    WS.wake();
-                    WS.activityCreate();
-                    WS.displayCardTree();
-                    var tree = new WS.Cards();
-                    tree.add(data.text, 'GlassProv');
-                    WS.cardTree(tree);
-                    //console.log("It's me! And the text is: " + data.text);
-                    //WS.say(data.text);
-                } else {
-                    console.log("It's not me. But the text is: " + data.text);
-                }
-            });
+            line_cb = function(chan, data) {
+                        console.log("Got a lines object!");
+                        console.log(JSON.stringify(data));
+                        if (data.glassID == me) {
+                            WS.wake();
+                            WS.activityCreate();
+                            WS.displayCardTree();
+                            var tree = new WS.Cards();
+                            tree.add(data.text, 'GlassProv');
+                            WS.cardTree(tree);
+                            //console.log("It's me! And the text is: " + data.text);
+                            //WS.say(data.text);
+                        } else {
+                            console.log("It's not me. But the text is: " + data.text);
+                        }
+            }   
+            vid_cb = function(chan, data) {
+                        console.log("Got a vids object!");
+                        console.log(JSON.stringify(data));
+                        if (data.glassID == me) {
+                            WS.wake();
+                            WS.activityCreate();
+                            WS.displayCardTree();
+                            var tree = new WS.Cards();
+                            tree.add(data.url, 'GlassProv');
+                            WS.cardTree(tree);
+                            //console.log("It's me! And the text is: " + data.text);
+                            //WS.say(data.text);
+                        } else {
+                            console.log("It's not me. But the text is: " + data.url);
+                        }
+            }   
+            WS.subscribe('lines:' + me, line_cb);
+            WS.subscribe('lines', line_cb);
+            WS.subscribe('videos:' + me, vid_cb );
         });
     }
     window.onload = main;
