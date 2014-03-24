@@ -797,6 +797,7 @@ def getSlides(request):
     path = os.path.join(settings.BASE_DIR, "static/slides")
     slides = os.listdir(path)
     data = {"slides": slides}
+    print slides
     # WS send to dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 

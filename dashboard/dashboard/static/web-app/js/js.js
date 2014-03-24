@@ -32,6 +32,12 @@ var newslist = shuffle(["10 Animals You Didn't Know Existed.mp4",
                         "Taco Bell Themed PS4 Controller Unboxing!.mp4",
                         "The Weird Part of Youtube....mp4"]);
 
+var slideslist = [];
+
+slidessuccess = function(data){
+    slideslist = shuffle(data.slides);
+}
+
 var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf"];
 
 var colorLookup = {
@@ -57,6 +63,12 @@ $.ajax({
     url: "/api/ws/get",
     dataType: 'json',
     success: wssuccess
+});
+$.ajax({
+    type: "GET",
+    url: "/api/slides/get",
+    dataType: 'json',
+    success: slidessuccess
 });
 function rotate_cb(channel, message) {
   angle = -parseFloat(message);
@@ -127,6 +139,10 @@ function select(game){
     if(currentGame=="newsroom"){
         var textToDisplay = "Newsroom";
         $("#allbutton").hide();
+    }
+    if(currentGame=="slides"){
+        var textToDisplay = "Slides";
+        $("#allbutton").show();
     }
     document.getElementById("whichgame").innerHTML = "Current Game: " + textToDisplay;
 }
@@ -209,6 +225,16 @@ function changeContentAll(content){
     updateScreens();
 }
 
+function changeContentSlides(content){
+    $(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
+    ws.publish('slides', {"url": content});
+    $(".content a").html(content);
+
+    console.log("Content: " + content + "  Sent");
+
+    updateScreens();
+}
+
 function changeScreen(name,screen){
     var contentID = name+"-content";
     var tempContent=document.getElementById(contentID).innerHTML;
@@ -244,6 +270,13 @@ function handleRequest(user){
         console.log(data.text);
         changeContentAll(data.text);
     }
+
+    successSlides = function(data) {
+        console.log("Success!");
+        console.log(data);
+        changeContentSlides(data);
+    }
+
     if (currentGame == "lines"){
         $.ajax({
             type: "GET",
@@ -296,6 +329,10 @@ function handleRequest(user){
 
     if (currentGame == "newsroom"){
         successUserVideo("/static/news/"+newslist.pop());
+    }
+
+    if (currentGame == "slides"){
+        successSlides("/static/slides/"+slideslist.pop());
     }
 
 
