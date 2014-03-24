@@ -23,20 +23,25 @@
     <script type="text/javascript" src="js/wearscript-client.js"></script>
     <script type="text/javascript" src="js/reconnecting-websocket.js"></script>
     <script type="text/javascript" src="jquery/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
 
     <script type="text/javascript">
+        var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf"];
+
+
+        var lineChannels = _.map(IDlist, function(el) {return "lines:" + el});
+        lineChannels.unshift("lines");
+
+        var vidChannels = _.map(IDlist, function(el){ return "video:" + el});
+        vidChannels.unshift("video");
+
         wssuccess = function(data){
           server = data.wsurl;
           Socket = new ReconnectingWebSocket(server);
           console.log("Made the socket.");
           ws = myWearScriptConnectionFactory(Socket, function (connected) {
-            //$.ready(function() {
-              // $('#theDiv').html("WearScript Connected.");
-              // $('#theImage').attr('src', 'cute-little-cat.jpg');
-              // $('#theImage').attr('width', 1000);
               console.log('Connected: ' + connected);
-            //});
-            });
+          });
 
           // e.g. publish statement from broadcaster: 
           // ws.publish("glassprov", {user: "kevin.b.tu", glass:"1", command: "showline", line: "What's my line"});
@@ -46,7 +51,15 @@
           // glass: 1-4 (Which quadrant to display in)
           // command: "showline" or "playvideo"
           // line: text to display or video identifier
-          ws.subscribe('glassprov', glassprov_cb);
+
+          //ws.subscribe('glassprov', glassprov_cb);
+          // ws.subscribe('lines', lines_cb);
+          for (chan in lineChannels) {
+            ws.subscribe(lineChannels[chan], lines_cb)
+          }
+          for (chan in vidChannels) {
+            ws.subscribe(vidChannels[chan], vid_cb);
+          }
       };
       $.ajax({
           type: "GET",
@@ -55,20 +68,71 @@
           success: wssuccess
       });
 
-      function glassprov_cb(channel, message) {
-        // update user name
-        var quadrant = message.glass-1;
-        document.getElementsByClassName("user")[quadrant].innerHTML=message.user;
-        document.getElementsByClassName("audience-name")[quadrand].innerHTML="Submitted By: "+message.audience;
-        if(message.command=="showline"){
-          document.getElementsByClassName("text")[quadrant].innerHTML=message.line;
-          $('text').textfill({ maxFontPixels: 75 });
-        } else if(message.command=="playvideo"){
-          var id = 'video'+quadrant;
-          var finalText = "<video loop autoplay preload id='"+id+"'"+" class='video-js vjs-default-skin'"+" preload='auto' width='500' height='280'"+"><source src="+"'"+"videos/"+message.line+"'"+" type='video/mp4' />"+"</video>";
-          document.getElementsByClassName("text")[quadrant].innerHTML=finalText;
-        }
+      var nPanels = 6;
+
+      function lines_cb(channel, message) {
+          var panel = lineChannels.indexOf(channel);
+          if (panel == 0) {
+            for (i = 0; i < nPanels; i++ ) {
+              $("#q" + (panel + 1) + " span").html(message.text);
+            }
+            //send to all
+          } else {
+            $("#q" + panel + " span").html(message.text);
+            // send to the specific one
+          }
+          // show line on panel
       }
+      // var id = 'video'+quadrant;
+      //     var finalText = "<video loop autoplay preload id='"+id+"'"+" class='video-js vjs-default-skin'"+" preload='auto' width='500' height='280'"+"><source src="+"'"+"videos/"+message.line+"'"+" type='video/mp4' />"+"</video>";
+      //     document.getElementsByClassName("text")[quadrant].innerHTML=finalText;
+
+      function vid_cb(channel, message) {
+          var panel = vidChannels.indexOf(channel);
+          if (panel == 0) {
+            for (i = 0; i < nPanels; i++ ) {
+              $("#q" + (panel + 1) + " span").html("<video autoplay preload class='video-js vjs-default-skin' preload='auto' width='500' height='280'><source src='"+ escape(message.url)+"' type='video/mp4'/> </video>");
+            }
+            //send to all
+          } else {
+            $("#q" + panel + " span").html("<video autoplay preload class='video-js vjs-default-skin' preload='auto' height='100%'><source src='"+ escape(message.url)+"' type='video/mp4'/> </video>");
+            // send to the specific one
+          }
+          // show line on panel
+      }
+
+            // WS.subscribe('lines:' + me, function(chan, data) {
+            //     console.log("Got a lines object!");
+            //     console.log(JSON.stringify(data));
+            //     if (data.glassID == me) {
+            //         WS.wake();
+            //         WS.activityCreate();
+            //         WS.displayCardTree();
+            //         var tree = new WS.Cards();
+            //         tree.add(data.text, 'GlassProv');
+            //         WS.cardTree(tree);
+            //         //console.log("It's me! And the text is: " + data.text);
+            //         //WS.say(data.text);
+            //     } else {
+            //         console.log("It's not me. But the text is: " + data.text);
+            //     }
+            // });
+
+
+      // function glassprov_cb(channel, message) {
+      //   // update user name
+      //   var quadrant = message.glass-1;
+      //   document.getElementsByClassName("user")[quadrant].innerHTML=message.user;
+      //   document.getElementsByClassName("audience-name")[quadrand].innerHTML="Submitted By: "+message.audience;
+      //   if(message.command=="showline"){
+      //     document.getElementsByClassName("text")[quadrant].innerHTML=message.line;
+      //     $('text').textfill({ maxFontPixels: 75 });
+      //   } else if(message.command=="playvideo"){
+      //     var id = 'video'+quadrant;
+      //     var finalText = "<video loop autoplay preload id='"+id+"'"+" class='video-js vjs-default-skin'"+" preload='auto' width='500' height='280'"+"><source src="+"'"+"videos/"+message.line+"'"+" type='video/mp4' />"+"</video>";
+      //     document.getElementsByClassName("text")[quadrant].innerHTML=finalText;
+      //   }
+      // }
 
       function myWearScriptConnectionFactory(websocket, glassConnectedCallback) {
           function onopen(event) {
