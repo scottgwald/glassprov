@@ -1,6 +1,37 @@
 console.log("Loading js.js");
 var currentGame = "lines";
 
+function shuffle(a) {
+      var i = a.length - 1;
+      var j, temp;
+
+      while (i > 0) {
+            j = Math.floor(Math.random() * (i + 1));
+            temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+            i = i - 1;
+      }
+      return a;
+}
+
+var newslist = shuffle(["10 Animals You Didn't Know Existed.mp4",
+                        "Animals Are Evil Compilation.mp4",
+                        "files.txt",
+                        "Francis Unboxing a Playstation 4.mp4",
+                        "FUNNY, BAD AND WEIRD ACCIDENTS.mp4",
+                        "Funny Cats Sleeping in Weird Positions Compilation 2014 [NEW HD].mp4",
+                        "G Sports G Free Glove Unboxing - Ep. 146.mp4",
+                        "Harland Williams - Force Of Nature - Heckled by crows.mp4",
+                        "How Animals Eat Their Food - Best Kids Version.mp4",
+                        "MR FOAMER SIMPSON's First Unboxing Video!.mp4",
+                        "NATURE _ My Bionic Pet _ Meet Chris P. Bacon _ Roofus _ PBS.mp4",
+                        "Official inFamous_ Second Son Unboxing [HD].mp4",
+                        "Off The Pill - Weird People.mp4",
+                        "Raw_ Zoo Animals Celebrate St. Patrick's Day.mp4",
+                        "Taco Bell Themed PS4 Controller Unboxing!.mp4",
+                        "The Weird Part of Youtube....mp4"]);
+
 var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf"];
 
 var colorLookup = {
@@ -69,13 +100,12 @@ function select(game){
     document.getElementById(currentGame).setAttribute("class","");
     document.getElementById(game).className="active";
     currentGame = game;
-   
     if(currentGame=="lines"){
         var textToDisplay = "Lines From a Hat";
         $("#allbutton").hide();
     }
     if(currentGame=="dinnerparty"){
-        var textToDisplay = "Dinner Pary";
+        var textToDisplay = "Dinner Party";
         $("#allbutton").show();
     }
     if(currentGame=="jumpgenre"){
@@ -92,6 +122,10 @@ function select(game){
     }
     if(currentGame=="partyquirks2"){
         var textToDisplay = "Party Quirks 1";
+        $("#allbutton").hide();
+    }
+    if(currentGame=="newsroom"){
+        var textToDisplay = "Newsroom";
         $("#allbutton").hide();
     }
     document.getElementById("whichgame").innerHTML = "Current Game: " + textToDisplay;
@@ -111,7 +145,7 @@ function insertPerformer(uname,content,screen){
     cell1.className = "user";
     var cell2 = row.insertCell(1);
     cell2.id = name+"-content";
-    cell2.class = "content";
+    cell2.className = "content";
     var cell3 = row.insertCell(2);
     cell3.id = name+"-screen";
     var cell4 = row.insertCell(3);
@@ -152,9 +186,23 @@ function changeContent(name,content){
 
     updateScreens();
 }
+function changeContentVideo(name,content){
+    var contentID = name+"-content";
+    document.getElementById(contentID).innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>";
+    var str = encodeURIComponent(content);
+    var tempID = name+"-id";
+    var id = $("#"+tempID+" a").html();
+    console.log("change content for "+id);
+    ws.publish('video:' + id, {"url": content, "glassID": id});
+
+    console.log("Content: " + str + "  Sent");
+
+    updateScreens();
+}
 function changeContentAll(content){
     $(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
     ws.publish('lines', {"text": content});
+    $(".content a").html(content);
 
     console.log("Content: " + content + "  Sent");
 
@@ -183,6 +231,12 @@ function handleRequest(user){
         console.log("Success!");
         console.log(data.text);
         changeContent(user, data.text);
+    }
+
+    successUserVideo = function(data) {
+        console.log("Success!");
+        console.log(data);
+        changeContentVideo(user, data);
     }
 
     successAll = function(data) {
@@ -238,6 +292,10 @@ function handleRequest(user){
             dataType: 'json',
             success: success,
         });
+    }
+
+    if (currentGame == "newsroom"){
+        successUserVideo("/static/news/"+newslist.pop());
     }
 
 
