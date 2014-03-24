@@ -9,12 +9,7 @@ var colorLookup = {
     "f8:8f:ca:24:65:25": "cotton",
     "f8:8f:ca:24:64:89": "coal"
 }
-$.ajax({
-    type: "GET",
-    url: "/ws/get",
-    dataType: 'json',
-    success: wssuccess
-});
+
 wssuccess = function(data){
     server = data.wsurl;
     console.log("url " + server);
@@ -25,7 +20,13 @@ wssuccess = function(data){
       console.log('Connected: ' + connected);
     });
     ws.subscribe('rotation', rotate_cb);
-}
+};
+$.ajax({
+    type: "GET",
+    url: "/api/ws/get",
+    dataType: 'json',
+    success: wssuccess
+});
 function rotate_cb(channel, message) {
   angle = -parseFloat(message);
   console.log("channel: " + channel +" message: " + message);
@@ -71,21 +72,27 @@ function select(game){
    
     if(currentGame=="lines"){
         var textToDisplay = "Lines From a Hat";
+        $("#allbutton").hide();
     }
     if(currentGame=="dinnerparty"){
         var textToDisplay = "Dinner Pary";
+        $("#allbutton").show();
     }
     if(currentGame=="jumpgenre"){
         var textToDisplay = "Jump Genre";
+        $("#allbutton").show();
     }
     if(currentGame=="productpitch"){
         var textToDisplay = "Product Pitch";
+        $("#allbutton").hide();
     }
     if(currentGame=="partyquirks1"){
         var textToDisplay = "Party Quirks 1";
+        $("#allbutton").hide();
     }
     if(currentGame=="partyquirks2"){
         var textToDisplay = "Party Quirks 1";
+        $("#allbutton").hide();
     }
     document.getElementById("whichgame").innerHTML = "Current Game: " + textToDisplay;
 }
@@ -104,6 +111,7 @@ function insertPerformer(uname,content,screen){
     cell1.className = "user";
     var cell2 = row.insertCell(1);
     cell2.id = name+"-content";
+    cell2.class = "content";
     var cell3 = row.insertCell(2);
     cell3.id = name+"-screen";
     var cell4 = row.insertCell(3);
@@ -122,38 +130,37 @@ function insertPerformer(uname,content,screen){
     updateScreens();
     performerNumber += 1;
 }
+function loadscripts(){
+    $.ajax({
+          type: "GET",
+          url: "/api/ws/loadscript/",
+          dataType: 'json'
+      });
+}
 function changeContent(name,content){
     var contentID = name+"-content";
     document.getElementById(contentID).innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>";
-
     var str = encodeURIComponent(content);
     var tempID = name+"-id";
-    var id = document.getElementById(tempID).innerHTML;
+    var id = $("#"+tempID+" a").html();
     var finalID = encodeURIComponent(id);
     var line = "line=" + str + "&" + "glassID=" + finalID;
-
+    console.log("change content for "+id);
     ws.publish('lines:' + id, {"text": content, "glassID": id});
 
-    // $.ajax({
-    //     type: "GET",
-    //     url: serverURL + "/api/ws/line1/",
-    //     dataType: 'json',
-    //     success: success,
-    //     data: line
-    // });
-
-
-    //    $.ajax({
-    //    type: "GET",
-    //    url: serverURL + "/api/ws/line/",
-    //    dataType: 'json',
-    //    success: success,
-    //    data: line
-    //});
     console.log("Content: " + str + "  Sent");
 
     updateScreens();
 }
+function changeContentAll(content){
+    $(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
+    ws.publish('lines', {"text": content});
+
+    console.log("Content: " + content + "  Sent");
+
+    updateScreens();
+}
+
 function changeScreen(name,screen){
     var contentID = name+"-content";
     var tempContent=document.getElementById(contentID).innerHTML;
@@ -177,6 +184,12 @@ function handleRequest(user){
         console.log(data.text);
         changeContent(user, data.text);
     }
+
+    successAll = function(data) {
+        console.log("Success!");
+        console.log(data.text);
+        changeContentAll(data.text);
+    }
     if (currentGame == "lines"){
         $.ajax({
             type: "GET",
@@ -191,7 +204,7 @@ function handleRequest(user){
             type: "GET",
             url: "/api/dinnerparty/get/",
             dataType: 'json',
-            success: success,
+            success: successAll,
         });
     }
     if (currentGame == "jumpgenre"){
@@ -199,7 +212,7 @@ function handleRequest(user){
             type: "GET",
             url: "/api/jumpgenre/get/",
             dataType: 'json',
-            success: success,
+            success: successAll,
         });
     }
     if (currentGame == "productpitch"){

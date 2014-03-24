@@ -25,28 +25,36 @@
     <script type="text/javascript" src="jquery/jquery-1.11.0.min.js"></script>
 
     <script type="text/javascript">
-      server = "wss://api.picar.us/wearscriptdev/ws";
-      //server = 'ws://api.picar.us/wearscriptdev/ws';
-      Socket = new ReconnectingWebSocket(server);
-      console.log("Made the socket.");
-      ws = myWearScriptConnectionFactory(Socket, function (connected) {
-        //$.ready(function() {
-          // $('#theDiv').html("WearScript Connected.");
-          // $('#theImage').attr('src', 'cute-little-cat.jpg');
-          // $('#theImage').attr('width', 1000);
-          console.log('Connected: ' + connected);
-        //});
-        });
+        wssuccess = function(data){
+          server = data.wsurl;
+          Socket = new ReconnectingWebSocket(server);
+          console.log("Made the socket.");
+          ws = myWearScriptConnectionFactory(Socket, function (connected) {
+            //$.ready(function() {
+              // $('#theDiv').html("WearScript Connected.");
+              // $('#theImage').attr('src', 'cute-little-cat.jpg');
+              // $('#theImage').attr('width', 1000);
+              console.log('Connected: ' + connected);
+            //});
+            });
 
-      // e.g. publish statement from broadcaster: 
-      // ws.publish("glassprov", {user: "kevin.b.tu", glass:"1", command: "showline", line: "What's my line"});
-      // ws.publish("glassprov", {user: "scottgwald", glass:"2", command: "playvideo", line: "vid001.mp4"});
+          // e.g. publish statement from broadcaster: 
+          // ws.publish("glassprov", {user: "kevin.b.tu", glass:"1", command: "showline", line: "What's my line"});
+          // ws.publish("glassprov", {user: "scottgwald", glass:"2", command: "playvideo", line: "vid001.mp4"});
 
-      // User: username
-      // glass: 1-4 (Which quadrant to display in)
-      // command: "showline" or "playvideo"
-      // line: text to display or video identifier
-      ws.subscribe('glassprov', glassprov_cb);
+          // User: username
+          // glass: 1-4 (Which quadrant to display in)
+          // command: "showline" or "playvideo"
+          // line: text to display or video identifier
+          ws.subscribe('glassprov', glassprov_cb);
+      };
+      $.ajax({
+          type: "GET",
+          url: "/api/ws/get",
+          dataType: 'json',
+          success: wssuccess
+      });
+
       function glassprov_cb(channel, message) {
         // update user name
         var quadrant = message.glass-1;

@@ -111,7 +111,7 @@ try:
     print "os.environ['WEARSCRIPT_ENDPOINT'] is %s" % (os.environ['WEARSCRIPT_ENDPOINT'])
 except KeyError:
     print "os.environ['WEARSCRIPT_ENDPOINT'] not set."
-    os.environ['WEARSCRIPT_ENDPOINT'] = 'wss://api.picar.us/wearscriptdev/ws/QGiOtnhW8Byc5Tiv'
+    os.environ['WEARSCRIPT_ENDPOINT'] = 'ws://glassprov.media.mit.edu:8080/ws'
 client_endpoint = os.environ['WEARSCRIPT_ENDPOINT']
 print "Using client_endpoint %s" % client_endpoint
 WSCONN = WebSocketClientConnection(websocket.create_connection(client_endpoint))

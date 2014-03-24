@@ -26,7 +26,7 @@ function handleInput(){
     var dataString = JSON.stringify(dataObj);
     // send results to server here
     var success = function() {
-      console.log("Submitted line: " + textString);
+      console.log("Submitted line: " + dataString);
     }
     var right = document.getElementById('r');
     right.click();
@@ -49,8 +49,7 @@ function handleInput(){
         url: "/api/dinnerparty/create/",
         data: dataString,
         dataType: 'json',
-        success: success,
-        dataType: dataType
+        success: success
       });
     }
     if(title=="Jump Genre"){
@@ -59,8 +58,7 @@ function handleInput(){
 		    url: "/api/jumpgenre/create/",
 		    data: dataString,
 		    dataType: 'json',
-		    success: success,
-		    dataType: dataType
+		    success: success
 		    });
     }
     if(title=="Product Pitch"){
@@ -69,8 +67,7 @@ function handleInput(){
 		    url: "/api/productpitch/create/",
 		    data: dataString,
 		    dataType: 'json',
-		    success: success,
-		    dataType: dataType
+		    success: success
 		    });
     }
     if(title=="Party Quirks 1"){
@@ -79,8 +76,7 @@ function handleInput(){
 		    url: "/api/partyquirks1/create/",
 		    data: dataString,
 		    dataType: 'json',
-		    success: success,
-		    dataType: dataType
+		    success: success
 		    });
     }
     if(title=="Party Quirks 2"){
@@ -89,8 +85,7 @@ function handleInput(){
 		    url: "/api/partyquirks2/create/",
 		    data: dataString,
 		    dataType: 'json',
-		    success: success,
-		    dataType: dataType
+		    success: success
 		    });
     }
   } 

@@ -476,7 +476,7 @@ def getLine(request):
 
     # SHRI'S CHANGES, WITH MINOR MODS
     line = Line.objects.all()[random.randint(0, Line.objects.count() - 1)]  
-    # line = Line.objects.filter(timestamp=None)[random.randint(0, Line.objects.filter(timestamp=None).count() - 1)]
+    # line = Line.objects.filter(timestamp__isnull=True)[random.randint(0, Line.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
@@ -505,7 +505,7 @@ def createEmotion(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getEmotion(request):
-    emotion = Emotion.objects.filter(timestamp=None, id=request.GET["id"])[0]
+    emotion = Emotion.objects.filter(timestamp__isnull=True)[0]
     text = emotion.text
     emotion.timestamp=datetime.datetime.now()
     emotion.save()
@@ -533,11 +533,11 @@ def createClip(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getClip(request):
-    clip = Clip.objects.filter(timestamp=None).order_by('-votes')[0]
+    clip = Clip.objects.filter(ttimestamp__isnull=True).order_by('-votes')[0]
     text = clip.text
     clip.timestamp = datetime.datetime.now()
     clip.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
+    data = {"text":text}
     # WS: send to glass request.GET["glassid"] and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
@@ -591,7 +591,7 @@ def wsscript(request):
     <script>
     var me;
     function main() {
-        WS.serverConnect('{{WSUrl}}', function () {
+        WS.serverConnect('ws://glassprov.media.mit.edu:8080/ws', function () {
             // WS.say("Server connected yeah.");
             console.log(WSRAW.getGlassID());
             me = WSRAW.getGlassID();
@@ -667,11 +667,11 @@ def createPartyQuirk(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getPartyQuirk(request):
-    line = PartyQuirk.objects.filter(timestamp=None)[random.randint(0, PartyQuirk.objects.filter(timestamp=None).count() - 1)]
+    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, PartyQuirk.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
+    data = {"text":text}
     # WS send to request.GET["glassid"] glass and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
@@ -694,11 +694,11 @@ def createPartyQuirk2(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getPartyQuirk2(request):
-    line = PartyQuirk2.objects.filter(timestamp=None)[random.randint(0, PartyQuirk2.objects.filter(timestamp=None).count() - 1)]
+    line = PartyQuirk2.objects.filter(timestamp__isnull=True)[random.randint(0, PartyQuirk2.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
+    data = {"text":text}
     # WS send to request.GET["glassid"] glass and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
@@ -721,11 +721,11 @@ def createPartyQuirk3(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getPartyQuirk3(request):
-    line = PartyQuirk3.objects.filter(timestamp=None)[random.randint(0, PartyQuirk3.objects.filter(timestamp=None).count() - 1)]
+    line = PartyQuirk3.objects.filter(timestamp__isnull=True)[random.randint(0, PartyQuirk3.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
+    data = {"text":text}
     # WS send to request.GET["glassid"] glass and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
@@ -750,27 +750,20 @@ def createPledgeBreak1(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getPledgeBreak(request):
-    line = PledgeBreak1.objects.filter(timestamp=None)[random.randint(0, PledgeBreak1.objects.filter(timestamp=None).count() - 1)]
+    line = PledgeBreak1.objects.filter(timestamp__isnull=True)[random.randint(0, PledgeBreak1.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
 
-    line2 = PledgeBreak1.objects.filter(timestamp=None)[random.randint(0, PledgeBreak1.objects.filter(timestamp=None).count() - 1)]
-    text2 = line2.text
-
-    line2.timestamp = datetime.datetime.now()
-
-    line2.save()
-
-    data = {"text":text, "text2":text2, "glassid":request.GET["glassid"]}
+    data = {"text":text}
     # WS send to request.GET["glassid"] glass and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getAllPledgeBreaks(request):
-    pb1 = PledgeBreak1.objects.filter(timestamp=None)
-    pb2 = PledgeBreak1.objects.filter(timestamp=None)
+    pb1 = PledgeBreak1.objects.filter(timestamp__isnull=True)
+    pb2 = PledgeBreak1.objects.filter(timestamp__isnull=True)
 
     data = {"pb1": pb1, "pb2": pb2}
     # WS send to dashboard here
@@ -781,11 +774,11 @@ def getAllPledgeBreaks(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getLocation(request):
-    line = Location.objects.filter(timestamp=None)[random.randint(0, Location.objects.filter(timestamp=None).count() - 1)]
+    line = Location.objects.filter(timestamp__isnull=True)[random.randint(0, Location.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
-    data = {"text":text, "glassid":request.GET["glassid"]}
+    data = {"text":text}
     # WS send to request.GET["glassid"] glass and dashboard here
     return HttpResponse(serialize(data), content_type="application/json")
 

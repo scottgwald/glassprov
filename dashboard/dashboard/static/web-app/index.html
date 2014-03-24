@@ -64,6 +64,7 @@
                 <li><a href="#"><i class="fa fa-wrench"></i> Admin Page </a></li>
                 <li><a href="#"><i class="fa fa-user"></i> Audience Input <span class="badge"></span></a></li>
                 <li><a href="#"><i class="fa fa-edit"></i> Stage Display </a></li>
+                <li><a href="#" onclick="loadscripts()"><i class="fa fa-edit"></i> Load Scripts!! </a></li>
                 <li class="divider"></li>
                 <li><a href="#"><i class="fa fa-power-off"></i> Logout </a></li>
               </ul>
@@ -75,6 +76,7 @@
       <div id="page-wrapper">
         <div class="content-title">Performers</div>
         <div id="whichgame" style="font-size:20px;">Current Game: Lines From a Hat</div> 
+        <button id="allbutton" onclick="handleRequest('all')" style="display:none;">Send to all glasses</button>
         <table id="content-table" style="width:100%;margin-top:5px;" class="table table-hover row-clickable">
         </table>
 
