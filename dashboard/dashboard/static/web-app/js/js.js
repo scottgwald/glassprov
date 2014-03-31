@@ -38,13 +38,15 @@ slidessuccess = function(data){
     slideslist = shuffle(data.slides);
 }
 
-var IDlist = [ "f8:8f:ca:25:06:bf", "f8:8f:ca:24:4d:7b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf", "f8:8f:ca:25:06:bf"];
+var IDlist = [ "f8:8f:ca:25:58:6b", "f8:8f:ca:25:58:8b", "f8:8f:ca:25:c5:0b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:f8:e5"];
 
 var colorLookup = {
-    "f8:8f:ca:25:06:bf": "tangerine",
-    "f8:8f:ca:24:4d:7b": "shale",
-    "f8:8f:ca:24:65:25": "cotton",
-    "f8:8f:ca:24:64:89": "coal"
+    "f8:8f:ca:25:58:6b": "sky1",
+    "f8:8f:ca:25:58:8b": "sky2", 
+    "f8:8f:ca:25:c5:0b": "tangerine3",
+    "f8:8f:ca:24:64:89": "charcoal4",
+    "f8:8f:ca:24:65:25": "cotton5",
+    "f8:8f:ca:25:f8:e5": "shale6"
 }
 
 wssuccess = function(data){
@@ -227,7 +229,9 @@ function changeContentVideo(name,content){
 }
 function changeContentAll(content){
     $(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
-    ws.publish('lines', {"text": content});
+    for(id in IDlist){
+        ws.publish('lines:'+IDlist[id], {"text": content, "glassid": IDlist[id]});
+    }
     $(".content a").html(content);
 
     console.log("Content: " + content + "  Sent");
@@ -237,7 +241,7 @@ function changeContentAll(content){
 
 function changeContentSlides(content){
     $(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
-    ws.publish('slides', {"url": content});
+    ws.publish('slides:', {"url": content});
     $(".content a").html(content);
 
     console.log("Content: " + content + "  Sent");
