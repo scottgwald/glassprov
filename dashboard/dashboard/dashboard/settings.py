@@ -115,19 +115,19 @@ except KeyError:
     os.environ['WEARSCRIPT_ENDPOINT'] = 'ws://glassprov.media.mit.edu:8080/ws'
 client_endpoint = os.environ['WEARSCRIPT_ENDPOINT']
 print "Using client_endpoint %s" % client_endpoint
-WSCONN = WebSocketClientConnection(websocket.create_connection(client_endpoint))
-WSCONN.send(
-    'glass',
-    'script',
-    {'glass.html':
-    """
-    <script>
-    WS.wake();
-    WS.activityCreate();
-    WS.displayCardTree();
-    var tree = new WS.Cards();
-    tree.add('GlassProv', '');
-    WS.cardTree(tree);
-    </script>
-    """}
-)
+# WSCONN = WebSocketClientConnection(websocket.create_connection(client_endpoint))
+# WSCONN.send(
+#     'glass',
+#     'script',
+#     {'glass.html':
+#     """
+#     <script>
+#     WS.wake();
+#     WS.activityCreate();
+#     WS.displayCardTree();
+#     var tree = new WS.Cards();
+#     tree.add('GlassProv', '');
+#     WS.cardTree(tree);
+#     </script>
+#     """}
+# )
