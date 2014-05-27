@@ -210,9 +210,9 @@ function select(game){
 
 var performerNumber = 0;
 
-function insertPerformer(uname,content,screen){
+function insertPerformer(name,content,screen){
     // sanitized name
-    name = uname.replace(/\s+/g, '-').toLowerCase();
+    // name = uname.replace(/\s+/g, '-').toLowerCase();
     overwriteScreen(screen);
     var table = document.getElementById("content-table");
     var row = table.insertRow();
@@ -238,7 +238,7 @@ function insertPerformer(uname,content,screen){
     //cell4.innerHTML = IDlist.pop();
     console.log("Setting performerNumber " + performerNumber + " id to " + IDlist[performerNumber]);
     cell4.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+IDlist[performerNumber]+"</a>";
-    cell5.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+colorLookup[IDlist[performerNumber]]+"</a>";
+    cell5.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+actorColor[name]+"</a>";
     cell6.innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>?</a>";
     
     $('#'+ name + "-id").hide();
