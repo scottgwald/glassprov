@@ -271,7 +271,8 @@ function changeContent(name, content){
     var line = "line=" + str + "&" + "glassID=" + finalID;
     console.log("change content for "+id);
 
-    ws.send(actorId[name], 'To ' + name + ' with the ' + actorColor[name] + " Glass.");
+    ws.send(actorId[name], content);
+    // ws.send(actorId[name], 'To ' + name + ' with the ' + actorColor[name] + " Glass.");
     // ws.send('android:glass:f88fca26183f', 'To: the cotton glass. Love, dashboard');
 
     ws.publish('lines:' + id, {"text": content, "glassID": id});
