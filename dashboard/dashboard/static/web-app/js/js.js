@@ -40,6 +40,12 @@ slidessuccess = function(data){
 
 var IDlist = [ "f8:8f:ca:25:58:6b", "f8:8f:ca:25:58:8b", "f8:8f:ca:25:c5:0b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:f8:e5"];
 
+// ws.send('android:glass:f88fca2619bd', 'To: the charcoal glass. Love, ' + client_name);
+// ws.send('android:glass:f88fca25588b', 'To: the sky glass. Love, ' + client_name);
+// ws.send('android:glass:f88fca26183f', 'To: the cotton glass. Love, ' + client_name);
+// ws.send('android:glass:f88fca26273d', 'To: the shale glass. Love, ' + client_name);
+
+
 var colorLookup = {
     "f8:8f:ca:25:58:6b": "sky1",
     "f8:8f:ca:25:58:8b": "sky2", 
@@ -47,6 +53,22 @@ var colorLookup = {
     "f8:8f:ca:24:64:89": "charcoal4",
     "f8:8f:ca:24:65:25": "cotton5",
     "f8:8f:ca:25:f8:e5": "shale6"
+}
+
+Date.prototype.today = function () {
+    return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+}
+
+Date.prototype.timeNow = function () {
+     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+}
+
+currentTimeString = function () {
+    return new Date().today() + " @ " + new Date().timeNow();
+}
+
+function registered(channel, name) {
+    console.log("Registered as " + name);
 }
 
 wssuccess = function(data){
@@ -57,21 +79,26 @@ wssuccess = function(data){
     console.log("Made the socket.");
     ws = myWearScriptConnectionFactory(Socket, function (connected) {
       console.log('Connected: ' + connected);
+        ws.subscribe('registered', registered);
+        ws.send('register', 'registered', "dashboard:" + currentTimeString());
     });
-    ws.subscribe('rotation', rotate_cb);
+    // ws.subscribe('blob', get_blob)
 };
+
 $.ajax({
     type: "GET",
     url: "/api/ws/get",
     dataType: 'json',
     success: wssuccess
 });
+
 $.ajax({
     type: "GET",
     url: "/api/slides/get",
     dataType: 'json',
     success: slidessuccess
 });
+
 function rotate_cb(channel, message) {
   angle = -parseFloat(message);
   console.log("channel: " + channel +" message: " + message);
@@ -192,6 +219,7 @@ function insertPerformer(uname,content,screen){
     updateScreens();
     performerNumber += 1;
 }
+
 function loadscripts(){
     $.ajax({
           type: "GET",
@@ -199,7 +227,8 @@ function loadscripts(){
           dataType: 'json'
       });
 }
-function changeContent(name,content){
+
+function changeContent(name, content){
     var contentID = name+"-content";
     document.getElementById(contentID).innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>";
     var str = encodeURIComponent(content);
@@ -208,6 +237,9 @@ function changeContent(name,content){
     var finalID = encodeURIComponent(id);
     var line = "line=" + str + "&" + "glassID=" + finalID;
     console.log("change content for "+id);
+
+    ws.send('android:glass:f88fca26183f', 'To: the cotton glass. Love, dashboard');
+
     ws.publish('lines:' + id, {"text": content, "glassID": id});
 
     console.log("Content: " + str + "  Sent");
