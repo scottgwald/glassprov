@@ -71,6 +71,7 @@ var idLookup = {
     'android:glass:f88fca25586b': { color: "sky", colorIndex: "1", name: colorActor["sky"]},
     'android:glass:f88fca26183f': { color: "cotton", colorIndex: "0", name: colorActor["cotton"]},
     'android:glass:f88fca26273d': { color: "shale", colorIndex: "0", name: colorActor["shale"]},
+    'android:glass:f88fca2506bf': { color: "tangerine", colorIndex: "0", name: colorActor["tangerine"]}
 }
 
 actorId = {};
