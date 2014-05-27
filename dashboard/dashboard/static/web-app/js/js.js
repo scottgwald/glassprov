@@ -45,6 +45,32 @@ var IDlist = [ "f8:8f:ca:25:58:6b", "f8:8f:ca:25:58:8b", "f8:8f:ca:25:c5:0b", "f
 // ws.send('android:glass:f88fca26183f', 'To: the cotton glass. Love, ' + client_name);
 // ws.send('android:glass:f88fca26273d', 'To: the shale glass. Love, ' + client_name);
 
+var actorColor = {
+    "will": "sky",
+    "russ": "charcoal",
+    "lexie": "shale",
+    "max": "tangerine",
+    "paul": "shale"
+}
+
+function invertKeyVal(obj) {
+    out = {};
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            out[obj[key]] = key;
+        }
+    }
+    return out;
+}
+
+var colorActor = invertKeyVal(actorColor);
+
+var idLookup = {
+    'android:glass:f88fca2619bd': { color: "charcoal", colorIndex: "0", name: colorActor["charcoal"]},
+    'android:glass:f88fca25588b': { color: "sky", colorIndex: "0", name: colorActor["sky"]},
+    'android:glass:f88fca26183f': { color: "cotton", colorIndex: "0", name: colorActor["cotton"]},
+    'android:glass:f88fca26273d': { color: "shale", colorIndex: "0", name: colorActor["shale"]},
+}
 
 var colorLookup = {
     "f8:8f:ca:25:58:6b": "sky1",
@@ -414,10 +440,14 @@ function overwriteScreen(screen){
 
 window.onload = function() {
     console.log("Window loaded");
-    insertPerformer('Shannon Connelly','Texas Chili','Screen: Off');
-    insertPerformer('Don Schuerman','Barbecue Hash','Screen: Off');
-    insertPerformer('Paul Dome','Buffalo Shrimp','Screen: Off');
-    insertPerformer('Dave Sawyer','Corn Pudding','Screen: Off');
-    insertPerformer('Robert Woo','Dirty Rice','Screen: Off');
-    insertPerformer('Will Luera','Green Beans','Screen: On');
+    // insertPerformer('Shannon Connelly','Texas Chili','Screen: Off');
+    // insertPerformer('Don Schuerman','Barbecue Hash','Screen: Off');
+    // insertPerformer('Paul Dome','Buffalo Shrimp','Screen: Off');
+    // insertPerformer('Dave Sawyer','Corn Pudding','Screen: Off');
+    // insertPerformer('Robert Woo','Dirty Rice','Screen: Off');
+    // insertPerformer('Will Luera','Green Beans','Screen: On');
+
+    for (var key in actorColor) {
+        insertPerformer(key, 'Awaiting line', 'Screen: Off');
+    }
 }
