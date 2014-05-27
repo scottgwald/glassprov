@@ -72,6 +72,12 @@ var idLookup = {
     'android:glass:f88fca26273d': { color: "shale", colorIndex: "0", name: colorActor["shale"]},
 }
 
+actorId = {};
+
+for (var key in idLookup) {
+    actorId[idLookup[key].name] = key;
+}
+
 var colorLookup = {
     "f8:8f:ca:25:58:6b": "sky1",
     "f8:8f:ca:25:58:8b": "sky2", 
@@ -255,6 +261,7 @@ function loadscripts(){
 }
 
 function changeContent(name, content){
+    console.log("Got changeContent with name " + name);
     var contentID = name+"-content";
     document.getElementById(contentID).innerHTML = "<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>";
     var str = encodeURIComponent(content);
@@ -264,7 +271,8 @@ function changeContent(name, content){
     var line = "line=" + str + "&" + "glassID=" + finalID;
     console.log("change content for "+id);
 
-    ws.send('android:glass:f88fca26183f', 'To: the cotton glass. Love, dashboard');
+    ws.send(actorId[name], 'To ' + name + ' with the ' + actorColor[name] + " Glass.");
+    // ws.send('android:glass:f88fca26183f', 'To: the cotton glass. Love, dashboard');
 
     ws.publish('lines:' + id, {"text": content, "glassID": id});
 
