@@ -48,7 +48,7 @@ var IDlist = [ "f8:8f:ca:25:58:6b", "f8:8f:ca:25:58:8b", "f8:8f:ca:25:c5:0b", "f
 var actorColor = {
     "will": "sky",
     "russ": "charcoal",
-    "lexie": "shale",
+    "lexie": "cotton",
     "max": "tangerine",
     "paul": "shale"
 }
