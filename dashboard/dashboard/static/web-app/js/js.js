@@ -68,14 +68,21 @@ var colorActor = invertKeyVal(actorColor);
 var idLookup = {
     'android:glass:f88fca2619bd': { color: "charcoal", colorIndex: "0", name: colorActor["charcoal"]},
     'android:glass:f88fca25588b': { color: "sky", colorIndex: "0", name: colorActor["sky"]},
+    'android:glass:f88fca25586b': { color: "sky", colorIndex: "1", name: colorActor["sky"]},
     'android:glass:f88fca26183f': { color: "cotton", colorIndex: "0", name: colorActor["cotton"]},
     'android:glass:f88fca26273d': { color: "shale", colorIndex: "0", name: colorActor["shale"]},
 }
 
 actorId = {};
 
+// each actor has an array -- so that backup glasses are supported
 for (var key in idLookup) {
-    actorId[idLookup[key].name] = key;
+    var name = idLookup[key].name;
+    if (actorId.hasOwnProperty(name)) {
+        actorId[name].push(key);
+    } else {
+        actorId[idLookup[key].name] = [key];
+    }
 }
 
 var colorLookup = {
@@ -271,7 +278,13 @@ function changeContent(name, content){
     var line = "line=" + str + "&" + "glassID=" + finalID;
     console.log("change content for "+id);
 
-    ws.send(actorId[name], content);
+    // send to all glasses assign to this actor
+    for (var i = 0; i < actorId[name].length; i++) {
+        ws.send(actorId[name][i], content);
+    }
+
+    // ws.send(actorId[name], content);
+
     // ws.send(actorId[name], 'To ' + name + ' with the ' + actorColor[name] + " Glass.");
     // ws.send('android:glass:f88fca26183f', 'To: the cotton glass. Love, dashboard');
 
