@@ -1,6 +1,8 @@
 var results = new Array();
 var imgs = new Array();
 
+console.log("Loading main.js");
+
 function processInput(){
   if(counter>5){
     counter-=6;
@@ -33,7 +35,7 @@ function handleInput(){
 
 
     // ADD SERVER INTERACTION FOR ALL GAMES
-    if(title=="Lines From a Hat"){
+    if(title=="Lines From a Glass"){
       $.ajax({
         type: "POST",
         url: "/api/lines/create/",
@@ -43,7 +45,7 @@ function handleInput(){
         success: success,
       });
     }
-    if(title=="Dinner Party"){ 
+    if(title=="Everyday Routine"){ 
       $.ajax({
         type: "POST",
         url: "/api/dinnerparty/create/",
@@ -52,7 +54,7 @@ function handleInput(){
         success: success
       });
     }
-    if(title=="Jump Genre"){
+    if(title=="Jump Emotions"){
 	$.ajax({
 		type: "POST",
 		    url: "/api/jumpgenre/create/",
@@ -70,7 +72,7 @@ function handleInput(){
 		    success: success
 		    });
     }
-    if(title=="Party Quirks 1"){
+    if(title=="Job Title"){
 	$.ajax({
 		type: "POST",
 		    url: "/api/partyquirks1/create/",
@@ -79,7 +81,7 @@ function handleInput(){
 		    success: success
 		    });
     }
-    if(title=="Party Quirks 2"){
+    if(title=="Acronym"){
 	$.ajax({
 		type: "POST",
 		    url: "/api/partyquirks2/create/",
@@ -90,7 +92,7 @@ function handleInput(){
     }
   } 
 }
- 
+
 function textFocus(){
   document.getElementsByClassName("txt")[counter].focus();
 }
