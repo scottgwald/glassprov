@@ -26,8 +26,27 @@
     <script type="text/javascript" src="js/underscore.js"></script>
 
     <script type="text/javascript">
+
+        Date.prototype.today = function () {
+            return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
+        }
+
+        Date.prototype.timeNow = function () {
+             return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+        }
+
+        currentTimeString = function () {
+            return new Date().today() + " @ " + new Date().timeNow();
+        }
+
+        function registered(channel, name) {
+            console.log("Registered as " + name);
+        }
+
+
         var IDlist = [ "f8:8f:ca:25:58:6b", "f8:8f:ca:25:58:8b", "f8:8f:ca:25:c5:0b", "f8:8f:ca:24:64:89", "f8:8f:ca:24:65:25", "f8:8f:ca:25:f8:e5"];
 
+        var nameList = ["all", "will", "russ", "lexie", "max", "paul"];
 
         var lineChannels = _.map(IDlist, function(el) {return "lines:" + el});
         lineChannels.unshift("lines");
@@ -41,6 +60,9 @@
           console.log("Made the socket.");
           ws = myWearScriptConnectionFactory(Socket, function (connected) {
               console.log('Connected: ' + connected);
+              ws.subscribe('registered', registered);
+              ws.send('register', 'registered', "dashboard:" + currentTimeString());
+              ws.subscribe('blob', blob_cb);
           });
 
           // e.g. publish statement from broadcaster: 
@@ -54,6 +76,10 @@
 
           //ws.subscribe('glassprov', glassprov_cb);
           // ws.subscribe('lines', lines_cb);
+
+          // here we'll subscribe to "blob" instead
+
+
           for (chan in lineChannels) {
             ws.subscribe(lineChannels[chan], lines_cb)
           }
@@ -70,6 +96,19 @@
       });
 
       var nPanels = 6;
+
+      function blob_cb(channel, actor, content) {
+        var panel = nameList.indexOf(actor);
+        if (panel == 0) {
+          for (var i = 0; i < nPanels; i++ ) {
+            $("#q" + (panel + 1) + " span").html(content);
+          }
+          //send to all
+        } else {
+          $("#q" + panel + " span").html(content);
+          // send to the specific one
+        }
+      }
 
       function lines_cb(channel, message) {
           var panel = lineChannels.indexOf(channel);

@@ -208,7 +208,7 @@ function select(game){
         $("#allbutton").hide();
     }
     if(currentGame=="partyquirks2"){
-        var textToDisplay = "Party Quirks 1";
+        var textToDisplay = "Party Quirks 2";
         $("#allbutton").hide();
     }
     if(currentGame=="newsroom"){
@@ -284,6 +284,10 @@ function changeContent(name, content){
         ws.send(actorId[name][i], content);
     }
 
+    ws.send('blob', name, content);
+
+    // also send to "blob," make sure Glasses are not subscribed to that
+
     // ws.send(actorId[name], content);
 
     // ws.send(actorId[name], 'To ' + name + ' with the ' + actorColor[name] + " Glass.");
@@ -310,6 +314,10 @@ function changeContentVideo(name,content){
 }
 function changeContentAll(content){
     $(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
+    for (var name in actorColor) {
+        ws.send('blob', name, content);
+    }
+
     for(id in IDlist){
         ws.publish('lines:'+IDlist[id], {"text": content, "glassid": IDlist[id]});
     }
