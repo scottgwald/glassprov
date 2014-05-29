@@ -201,7 +201,7 @@ function select(game){
     }
     if(currentGame=="productpitch"){
         var textToDisplay = "Product Pitch";
-        $("#allbutton").hide();
+        $("#allbutton").show();
     }
     if(currentGame=="partyquirks1"){
         var textToDisplay = "Party Quirks 1";
