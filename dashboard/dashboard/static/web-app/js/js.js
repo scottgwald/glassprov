@@ -47,10 +47,10 @@ var IDlist = [ "f8:8f:ca:25:58:6b", "f8:8f:ca:25:58:8b", "f8:8f:ca:25:c5:0b", "f
 
 var actorColor = {
     "will": "sky",
-    "russ": "charcoal",
-    "lexie": "cotton",
-    "max": "tangerine",
-    "paul": "shale"
+    "dave": "charcoal",
+    "rachel": "cotton",
+    "taylor": "tangerine",
+    "robert": "shale"
 }
 
 function invertKeyVal(obj) {
