@@ -152,7 +152,7 @@ function rotate_cb(channel, message) {
 function myWearScriptConnectionFactory(websocket, glassConnectedCallback) {
   function onopen(event) {
       console.log('opened');
-      ws.subscribe('subscriptions', subscription_cb);
+      // ws.subscribe('subscriptions', subscription_cb);
       ws.subscribe('log', log_cb);
       ws.subscribe('urlopen', urlopen_cb);
       ws.subscribe('battery', battery_cb);
