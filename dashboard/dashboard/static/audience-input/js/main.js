@@ -19,12 +19,12 @@ function handleInput(){
   var inp = document.getElementsByClassName("txt")[counter].value;
   
   if(inp!=''){
-    var userName = document.getElementById("name-field").value;console.log("User: "+userName);
+    //var userName = document.getElementById("name-field").value;console.log("User: "+userName);
     document.getElementsByClassName("txt")[counter].value ='';
     var title = document.getElementsByClassName("title")[counter].innerHTML; 
     results.push([title,inp]);
    
-    var dataObj = {"text":inp, "audience":userName};
+    var dataObj = {"text":inp};
     var dataString = JSON.stringify(dataObj);
     // send results to server here
     var success = function() {
@@ -45,7 +45,7 @@ function handleInput(){
         success: success,
       });
     }
-    if(title=="Everyday Routine"){ 
+    if(title=="Personality Quirk"){ 
       $.ajax({
         type: "POST",
         url: "/api/dinnerparty/create/",
