@@ -317,9 +317,13 @@ function changeContentVideo(name,content){
     updateScreens();
 }
 function changeContentAll(content){
-    $(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
+    //$(".content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
     for (var name in actorColor) {
+        $("#" + name + "-content").html("<a onclick=\""+"handleRequest("+"\'"+name+"\'"+")"+"\" href='#' style='color:#333;'>"+content+"</a>");
         ws.send('blob', name, content);
+        for (var i = 0; i < actorId[name].length; i++) {
+            ws.send(actorId[name][i], content);
+        }
     }
 
     for(id in IDlist){
@@ -414,7 +418,7 @@ function handleRequest(user){
             type: "GET",
             url: "/api/productpitch/get/",
             dataType: 'json',
-            success: success,
+            success: successAll,
         });
     }
     if (currentGame == "partyquirks1"){
