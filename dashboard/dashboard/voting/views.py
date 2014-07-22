@@ -740,7 +740,8 @@ def createPartyQuirk3(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def getPartyQuirk3(request):
-    line = PartyQuirk3.objects.filter(timestamp__isnull=True)[random.randint(0, PartyQuirk3.objects.filter(timestamp__isnull=True).count() - 1)]
+    line = PartyQuirk3.objects.all()[random.randint(0, PartyQuirk3.objects.count() - 1)]  
+    #line = PartyQuirk3.objects.filter(timestamp__isnull=True)[random.randint(0, PartyQuirk3.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
