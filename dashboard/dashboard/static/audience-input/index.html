@@ -28,7 +28,7 @@
             });
         });
         $("body").css("overflow", "hidden");
-        document.getElementById("name-field").focus();
+        // document.getElementById("name-field").focus();
         window.addEventListener('keyup', function (e) {
           if (e.keyCode === 38) { // up arrow
             // if(document.activeElement.value!=undefined){
@@ -84,7 +84,7 @@
             <li><a href="#">About</a></li> <!--about.html-->
             <li><a href="#">Contact</a></li> <!--contact.html-->
           </ul>
-	  <input type="text" placeholder="Name" class="form-control" style="margin-top:8px;width:20%;float:right;" id="name-field"></input>
+	  <!--<input type="text" placeholder="Name" class="form-control" style="margin-top:8px;width:20%;float:right;" id="name-field"></input>-->
         </div><!--/.nav-collapse -->
       </div>
     </div>
@@ -109,18 +109,8 @@
             <div class="item active">
                 <div class="fill" style="background-image:url('http://placehold.it/');"></div>
                 <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Everyday Routine</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter something that you do every day</div>
-                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
-                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
-                  </form>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/');"></div>
-                <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Job Title</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a job title or occupation</div>
+                  <div class="title">Personality Quirk</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a physical or verbal quirk, e.g. lipsmacking or talks like a pirate.</div>
                     <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
                     <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
                   </form>
