@@ -54,6 +54,15 @@ function handleInput(){
         success: success
       });
     }
+    if(title=="Comedy Special"){ 
+      $.ajax({
+        type: "POST",
+        url: "/api/partyquirks3/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+      });
+    }
     if(title=="Jump Emotions"){
 	$.ajax({
 		type: "POST",

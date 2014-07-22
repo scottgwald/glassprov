@@ -199,6 +199,10 @@ function select(game){
         var textToDisplay = "Dinner Party";
         $("#allbutton").show();
     }
+    if(currentGame=="comedyspecial"){
+        var textToDisplay = "Comedy Special";
+        $("#allbutton").show();
+    }
     if(currentGame=="jumpgenre"){
         var textToDisplay = "Jump Genre";
         $("#allbutton").show();
@@ -409,6 +413,14 @@ function handleRequest(user){
         $.ajax({
             type: "GET",
             url: "/api/jumpgenre/get/",
+            dataType: 'json',
+            success: successAll,
+        });
+    }
+    if (currentGame == "comedyspecial"){
+        $.ajax({
+            type: "GET",
+            url: "/api/partyquirks3/get/",
             dataType: 'json',
             success: successAll,
         });
