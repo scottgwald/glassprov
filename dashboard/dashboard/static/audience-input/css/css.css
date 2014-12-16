@@ -46,10 +46,48 @@ html, body {
   background-size: cover;
 }
 
+.fill.gif {
+  background-position: top center;
+  background-size: contain;
+}
+
 .section {
   margin: 50px 0;
 }
 
 footer {
   margin: 50px 0;
+}
+.carousel-caption {
+  margin-top: -50px;
+  padding-top: 0px;
+  top: 35%;
+}
+.gif + .carousel-caption .title,
+.gif + .carousel-caption .subtitle{
+  color: white;
+}
+.carousel-control {
+  margin-top: -50px;
+}
+.placeholdit {
+  background-image:url('http://placehold.it/');
+}
+.fill.blue {
+  background-image:url('/img/blue.gif');
+}
+.fill.greenred {
+  background-image:url('/img/greenred.gif');
+}
+.fill.yellow {
+  background-image:url('/img/yellow.gif');
+}
+.fill.purple {
+  background-image:url('/img/purple.gif');
+}
+.fill.redyellow {
+  background-image:url('/img/redyellow.gif');
+}
+.headermargin {
+  height: 50px
 }

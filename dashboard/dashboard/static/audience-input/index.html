@@ -16,6 +16,153 @@
 
     <!-- Custom styles for this template -->
     <link href="css/css.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">GlassProv</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">Submit</a></li>
+            <li><a href="#">About</a></li> <!--about.html-->
+            <li><a href="#">Contact</a></li> <!--contact.html-->
+          </ul>
+	  <!--<input type="text" placeholder="Name" class="form-control" style="margin-top:8px;width:20%;float:right;" id="name-field"></input>-->
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    <div class="headermargin"></div>
+    <div id="myCarousel" class="carousel slide">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill placeholdit"></div>
+                <div class="carousel-caption">
+                  <div class="title">Personality Quirk</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a physical or verbal quirk, e.g. lipsmacking or talks like a pirate.</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill placeholdit"></div>
+                <div class="carousel-caption">
+                  <div class="title">Lines from a Glass</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a phrase, piece of advice, or quote</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill placeholdit"></div>
+                <div class="carousel-caption">
+                  <div class="title">Acronym</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an acronym, either real (FBI) or fake (ZYXS)</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill placeholdit"></div>
+                <div class="carousel-caption">
+                  <div class="title">Comedy Special</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a one-sentence TV show premise.</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill placeholdit"></div>
+                <div class="carousel-caption">
+                  <div class="title">Product Pitch</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter two unrelated nouns</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill gif blue"></div>
+                <div class="carousel-caption">
+                  <div class="title">Blue</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an emotion or mood</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill gif greenred"></div>
+                <div class="carousel-caption">
+                  <div class="title">Green Red</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an emotion or mood</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill gif yellow"></div>
+                <div class="carousel-caption">
+                  <div class="title">Yellow</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an emotion or mood</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill gif purple"></div>
+                <div class="carousel-caption">
+                  <div class="title">Purple</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an emotion or mood</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill gif redyellow"></div>
+                <div class="carousel-caption">
+                  <div class="title">Red Yellow</div>
+                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an emotion or mood</div>
+                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
+                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
+                  </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Controls -->
+      <a id="l" onmouseover="defocus()" onmouseout="textFocus()" onclick="prev();"
+        class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a id="r"  onmouseover="defocus();" onmouseout="textFocus();" onclick="next();"
+        class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript">
     var counter = 0;
@@ -56,130 +203,12 @@
         
         window.addEventListener('keyup', function (e) {
           if (e.keyCode === 13) { // enter key
-            processNewsroom();
+            //processNewsroom();
             processInput();
           }}, false);
         }
         window.addEventListener('DOMContentLoaded', contentLoaded, false); 
     }());
     </script>
-  </head>
-
-  <body>
-
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">GlassProv</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Submit</a></li>
-            <li><a href="#">About</a></li> <!--about.html-->
-            <li><a href="#">Contact</a></li> <!--contact.html-->
-          </ul>
-	  <!--<input type="text" placeholder="Name" class="form-control" style="margin-top:8px;width:20%;float:right;" id="name-field"></input>-->
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
-    <div id="myCarousel" class="carousel slide">
-        <!-- Indicators -->
-<!--       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-        <li data-target="#myCarousel" data-slide-to="4"></li>
-        <li data-target="#myCarousel" data-slide-to="5"></li>
-        <li data-target="#myCarousel" data-slide-to="6"></li>
-        <li data-target="#myCarousel" data-slide-to="7"></li>
-        <li data-target="#myCarousel" data-slide-to="8"></li>
-        <li data-target="#myCarousel" data-slide-to="9"></li>
-        <li data-target="#myCarousel" data-slide-to="10"></li>
-      </ol> -->
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="fill" style="background-image:url('http://placehold.it/');"></div>
-                <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Personality Quirk</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a physical or verbal quirk, e.g. lipsmacking or talks like a pirate.</div>
-                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
-                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
-                  </form>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/');"></div>
-                <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Lines from a Glass</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a phrase, piece of advice, or quote</div>
-                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
-                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
-                  </form>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/');"></div>
-                <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Acronym</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an acronym, either real (FBI) or fake (ZYXS)</div>
-                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
-                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
-                  </form>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/');"></div>
-                <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Comedy Special</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter a one-sentence TV show premise.</div>
-                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
-                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
-                  </form>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/');"></div>
-                <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Product Pitch</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter two unrelated nouns</div>
-                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
-                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
-                  </form>
-                </div>
-            </div>
-            <div class="item">
-                <div class="fill" style="background-image:url('http://placehold.it/');"></div>
-                <div class="carousel-caption"style="top:35%;">
-                  <div class="title">Jump Emotions</div>
-                  <form name="input" onsubmit="return processInput()"style="font-size:15px;color:#333;">  <div class="subtitle">Enter an emotion or mood</div>
-                    <input type="text" class="form-control txt"name="user"placeholder="Enter Idea!"><br>
-                    <a class="btn btn-small btn-primary"href="javascript: processInput()">Submit</a>
-                  </form>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Controls -->
-      <a id="l" onmouseover="if(counter<0){counter+=6;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter<0){counter+=6;}document.getElementsByClassName('txt')[counter].focus();"onclick="counter-=1;" class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a id="r" onmouseover="if(counter>5){counter=counter-6;}document.getElementsByClassName('txt')[counter].blur();" onmouseout="if(counter>5){counter=counter-6;}document.getElementsByClassName('txt')[counter].focus();" onclick="counter+=1;" class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div>
-
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>

@@ -1,15 +1,19 @@
 var results = new Array();
 var imgs = new Array();
-
 console.log("Loading main.js");
 
+var counter = 0;
+function prev(){
+  var numItems = document.getElementsByClassName("txt").length || 10;
+  counter = (counter-1+numItems)% numItems;
+}
+function next(){
+  var numItems = document.getElementsByClassName("txt").length || 10;
+  counter = (counter+1+numItems)% numItems;
+}
 function processInput(){
-  if(counter>5){
-    counter-=6;
-  }
-  if(counter<0){
-    counter+=6;
-  }
+  var numItems = document.getElementsByClassName("txt").length || 10;
+  counter = (counter + numItems) % numItems;
   defocus();
   setTimeout(handleInput,200);
   setTimeout(textFocus,500);
@@ -64,8 +68,8 @@ function handleInput(){
       });
     }
     if(title=="Jump Emotions"){
-	$.ajax({
-		type: "POST",
+    	$.ajax({
+    		type: "POST",
 		    url: "/api/jumpgenre/create/",
 		    data: dataString,
 		    dataType: 'json',
@@ -73,8 +77,8 @@ function handleInput(){
 		    });
     }
     if(title=="Product Pitch"){
-	$.ajax({
-		type: "POST",
+    	$.ajax({
+    		type: "POST",
 		    url: "/api/productpitch/create/",
 		    data: dataString,
 		    dataType: 'json',
@@ -82,8 +86,8 @@ function handleInput(){
 		    });
     }
     if(title=="Job Title"){
-	$.ajax({
-		type: "POST",
+    	$.ajax({
+    		type: "POST",
 		    url: "/api/partyquirks1/create/",
 		    data: dataString,
 		    dataType: 'json',
@@ -91,13 +95,67 @@ function handleInput(){
 		    });
     }
     if(title=="Acronym"){
-	$.ajax({
-		type: "POST",
-		    url: "/api/partyquirks2/create/",
-		    data: dataString,
-		    dataType: 'json',
-		    success: success
-		    });
+      $.ajax({
+        type: "POST",
+        url: "/api/partyquirks2/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+        });
+    }
+    if(title=="Blue"){
+      $.ajax({
+        type: "POST",
+        url: "/api/haloblue/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+        });
+    }
+    if(title=="Green Red"){
+      $.ajax({
+        type: "POST",
+        url: "/api/haloredgreen/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+        });
+    }
+    if(title=="Yellow"){
+      $.ajax({
+        type: "POST",
+        url: "/api/haloyellow/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+        });
+    }
+    if(title=="Yellow"){
+      $.ajax({
+        type: "POST",
+        url: "/api/haloyellow/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+        });
+    }
+    if(title=="Red Yellow"){
+      $.ajax({
+        type: "POST",
+        url: "/api/haloredyellow/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+        });
+    }
+    if(title=="Purple"){
+      $.ajax({
+        type: "POST",
+        url: "/api/halopurple/create/",
+        data: dataString,
+        dataType: 'json',
+        success: success
+        });
     }
   } 
 }
