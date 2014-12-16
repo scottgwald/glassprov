@@ -680,14 +680,14 @@ def wsline1(request):
 @require_http_methods(["POST"])
 def createHaloblue(request):
     text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
+    data = ColorEmotionBlue.objects.create(text=text)
     data.save()
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getHaloblue(request):
-    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionBlue.objects.filter(timestamp__isnull=True).count() - 1)]
+    line = ColorEmotionBlue.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionBlue.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
@@ -699,14 +699,14 @@ def getHaloblue(request):
 @require_http_methods(["POST"])
 def createHalogreen(request):
     text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
+    data = ColorEmotionGreen.objects.create(text=text)
     data.save()
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getHalogreen(request):
-    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionGreen.objects.filter(timestamp__isnull=True).count() - 1)]
+    line = ColorEmotionGreen.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionGreen.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
@@ -718,14 +718,14 @@ def getHalogreen(request):
 @require_http_methods(["POST"])
 def createHaloyellow(request):
     text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
+    data = ColorEmotionYellow.objects.create(text=text)
     data.save()
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getHaloyellow(request):
-    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionYellow.objects.filter(timestamp__isnull=True).count() - 1)]
+    line = ColorEmotionYellow.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionYellow.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
@@ -737,14 +737,14 @@ def getHaloyellow(request):
 @require_http_methods(["POST"])
 def createHaloredyellow(request):
     text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
+    data = ColorEmotionRedYellow.objects.create(text=text)
     data.save()
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getHaloredyellow(request):
-    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionRedYellow.objects.filter(timestamp__isnull=True).count() - 1)]
+    line = ColorEmotionRedYellow.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionRedYellow.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
@@ -756,14 +756,14 @@ def getHaloredyellow(request):
 @require_http_methods(["POST"])
 def createHalopurple(request):
     text = json.loads(request.body)['text']
-    data = PartyQuirk.objects.create(text=text)
+    data = ColorEmotionPurple.objects.create(text=text)
     data.save()
     return HttpResponse(serialize(data), content_type="application/json")
 
 @csrf_exempt
 @require_http_methods(["GET"])
 def getHalopurple(request):
-    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionPurple.objects.filter(timestamp__isnull=True).count() - 1)]
+    line = ColorEmotionPurple.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionPurple.objects.filter(timestamp__isnull=True).count() - 1)]
     text = line.text
     line.timestamp = datetime.datetime.now()
     line.save()
