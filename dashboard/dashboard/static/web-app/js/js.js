@@ -46,11 +46,9 @@ var IDlist = [ "f8:8f:ca:25:58:6b", "f8:8f:ca:25:58:8b", "f8:8f:ca:25:c5:0b", "f
 // ws.send('android:glass:f88fca26273d', 'To: the shale glass. Love, ' + client_name);
 
 var actorColor = {
-    "will": "sky",
-    "dave": "charcoal",
-    "rachel": "cotton",
-    "taylor": "tangerine",
-    "robert": "shale"
+    "dave": "tangerine",
+    "ari": "cotton",
+    "robert": "charcoal"
 }
 
 function invertKeyVal(obj) {
