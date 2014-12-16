@@ -825,7 +825,8 @@ def getSlides(request):
 @csrf_exempt
 @require_http_methods(["GET"])
 def wsgeturl(request):
-    data = {"wsurl": "ws://192.168.2.253:8112/"}
+    data = {"wsurl": "ws://192.168.1.146:8112/"}
+    # data = {"wsurl": "ws://192.168.1.222:8112/"}
     # data = {"wsurl": "ws://glassprov.media.mit.edu:8080/ws"}
     # WS send to dashboard here
     return HttpResponse(serialize(data), content_type="application/json")

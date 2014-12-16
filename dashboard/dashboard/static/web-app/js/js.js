@@ -67,6 +67,7 @@ var idLookup = {
     'android:glass:fc4dd4cd5776': { color: "sky", colorIndex: "0", name: colorActor["sky"], works: true},
     'android:glass:fc4dd4cc51dc': { color: "sky", colorIndex: "1", name: colorActor["sky"], works: true},
     'android:glass:f88fca25586b': { color: "sky", colorIndex: "2", name: colorActor["sky"], works: true},
+    'android:glass:f88fca25588b': { color: "sky", colorIndex: "3", name: colorActor["sky"], works: true},
     'android:glass:fc4dd4cd4fa6': { color: "charcoal", colorIndex: "0", name: colorActor["charcoal"], works: true},
     'android:glass:fc4dd4cdc3aa': { color: "charcoal", colorIndex: "1", name: colorActor["charcoal"], works: true},
     'android:glass:f88fca261959': { color: "charcoal", colorIndex: "2", name: colorActor["charcoal"], works: true},
@@ -75,8 +76,10 @@ var idLookup = {
     'android:glass:fc4dd4cdb52a': { color: "tangerine", colorIndex: "1", name: colorActor["tangerine"], works: true},
     'android:glass:fc4dd4cb7b7e': { color: "tangerine", colorIndex: "2", name: colorActor["tangerine"], works: true},
     'android:glass:f88fca25c50b': { color: "tangerine", colorIndex: "3", name: colorActor["tangerine"], works: true},
+    'android:glass:f88fca25c525': { color: "tangerine", colorIndex: "4", name: colorActor["tangerine"], works: true},
     'android:glass:f88fca26273d': { color: "shale", colorIndex: "0", name: colorActor["shale"]},
-    'android:glass:f88fca2627c1': { color: "shale", colorIndex: "1", name: colorActor["shale"]}
+    'android:glass:f88fca2627c1': { color: "shale", colorIndex: "1", name: colorActor["shale"]},
+    'android:glass:f88fca12246a': { color: "shale", colorIndex: "2", name: colorActor["shale"]}
 }
 
 actorId = {};
