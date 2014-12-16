@@ -130,15 +130,6 @@ function handleInput(){
         success: success
         });
     }
-    if(title=="Yellow"){
-      $.ajax({
-        type: "POST",
-        url: "/api/haloyellow/create/",
-        data: dataString,
-        dataType: 'json',
-        success: success
-        });
-    }
     if(title=="Red Yellow"){
       $.ajax({
         type: "POST",
