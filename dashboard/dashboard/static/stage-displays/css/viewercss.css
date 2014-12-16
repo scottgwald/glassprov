@@ -18,14 +18,18 @@ html,body {
   float:left;
   height: 80%;
   
-  display: table;
+  /*display: table;*/
 }
 .text{
-  font-size: 75px;
+  /*font-size: 75px;*/
+  font-size: 60px;
+  padding-top: 16px;
   text-align: center;  
   width: 100%;
-  display: table-cell;
+  /*display: table-cell;*/
   vertical-align: middle;
+  word-wrap: break-word;
+  line-height: 1.1em;
 }
 .user{
   padding-top: 5px;
