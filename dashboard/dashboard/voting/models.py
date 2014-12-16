@@ -41,6 +41,46 @@ class PartyQuirk(models.Model):
 	def __str__(self):
 		return self.text
 
+### Mina
+class ColorEmotionBlue(models.Model):
+	text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+### Mina
+class ColorEmotionGreen(models.Model):
+	text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+### Mina
+class ColorEmotionYellow(models.Model):
+	text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+### Mina
+class ColorEmotionRedYellow(models.Model):
+	text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
+### Mina
+class ColorEmotionPurple(models.Model):
+	text = models.CharField(max_length=140)
+	timestamp = models.DateTimeField(default=None, null=True)
+
+	def __str__(self):
+		return self.text
+
 class Location(models.Model):
     text = models.CharField(max_length=140)
     timestamp = models.DateTimeField(default=None, null=True)

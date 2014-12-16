@@ -195,6 +195,26 @@ function select(game){
     document.getElementById(currentGame).setAttribute("class","");
     document.getElementById(game).className="active";
     currentGame = game;
+    if(currentGame=="haloRed"){
+        var textToDisplay = "Emotion: Red";
+        $("#allbutton").hide();
+    }
+    if(currentGame=="haloYellow"){
+        var textToDisplay = "Emotion: Yellow";
+        $("#allbutton").hide();
+    }
+    if(currentGame=="haloRedYellow"){
+        var textToDisplay = "Emotion:  Red Yellow";
+        $("#allbutton").hide();
+    }
+    if(currentGame=="haloPurple"){
+        var textToDisplay = "Emotion: Purple";
+        $("#allbutton").hide();
+    }
+    if(currentGame=="haloGreen"){
+        var textToDisplay = "Emotion: Green";
+        $("#allbutton").hide();
+    }
     if(currentGame=="lines"){
         var textToDisplay = "Lines From a Hat";
         $("#allbutton").hide();

@@ -30,13 +30,24 @@ from .views import (
         getPartyQuirk3,
         getAllPartyQuirks3,
         
-
         wstest,
         wsline,
         wsline1,
         wsscript,
         wsgeturl,
-        getSlides
+        getSlides,
+
+        createHaloblue,
+        createHalogreen,
+        createHaloyellow,
+        createHaloredyellow,
+        createHalopurple,
+
+        getHaloblue,
+        getHalogreen,
+        getHaloyellow,
+        getHaloredyellow,
+        getHalopurple
 )
 
 urlpatterns = (
@@ -74,6 +85,22 @@ urlpatterns = (
         url(r"^ws/get/$", wsgeturl, name="wsgeturl"),
         url(r"^ws/line/$", wsline, name="wsline"),
         url(r"^ws/line1/$", wsline1, name="wsline1"),
-        url(r"^ws/loadscript/$", wsscript, name="wsscript")
+        url(r"^ws/loadscript/$", wsscript, name="wsscript"),
+
+        url(r"^api/haloblue/create/$", createHaloblue, name="createHaloblue"),
+        url(r"^api/haloblue/get/$", getHaloblue, name="getHaloblue"),
+
+        url(r"^api/halogreen/create/$", createHalogreen, name="createHalogreen"),
+        url(r"^api/halogreen/get/$", getHalogreen, name="getHalogreen"),
+
+        url(r"^api/haloyellow/create/$", createHaloyellow, name="createHaloyellow"),
+        url(r"^api/haloyellow/get/$", getHaloyellow, name="getHaloyellow"),
+
+        url(r"^api/haloredyellow/create/$", createHaloredyellow, name="createHaloredyellow"),
+        url(r"^api/haloredyellow/get/$", getHaloredyellow, name="getHaloredyellow"),
+
+        url(r"^api/halopurple/create/$", createHalopurple, name="createHalopurple"),
+        url(r"^api/halopurple/get/$", getHalopurple, name="getHalopurple")
+
 
 )

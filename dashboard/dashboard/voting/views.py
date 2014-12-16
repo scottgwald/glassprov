@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Line, Emotion, Clip, PledgeBreak1, PartyQuirk, PartyQuirk2, PartyQuirk3, Location
+from .models import Line, Emotion, Clip, PledgeBreak1, PartyQuirk, ColorEmotionBlue, ColorEmotionGreen, ColorEmotionYellow, ColorEmotionRedYellow, ColorEmotionPurple, PartyQuirk2, PartyQuirk3, Location
 # , Location, Style, Noun, Quirk, Celebrity
 
 import random
@@ -672,6 +672,106 @@ def wsline1(request):
         """ % (argID, line)}
     )
     return render_to_response("wstest.html", {'line': line})
+
+
+#### GET & CREATE COLORS BEGIN
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createHaloblue(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getHaloblue(request):
+    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionBlue.objects.filter(timestamp__isnull=True).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createHalogreen(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getHalogreen(request):
+    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionGreen.objects.filter(timestamp__isnull=True).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createHaloyellow(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getHaloyellow(request):
+    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionYellow.objects.filter(timestamp__isnull=True).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createHaloredyellow(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getHaloredyellow(request):
+    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionRedYellow.objects.filter(timestamp__isnull=True).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["POST"])
+def createHalopurple(request):
+    text = json.loads(request.body)['text']
+    data = PartyQuirk.objects.create(text=text)
+    data.save()
+    return HttpResponse(serialize(data), content_type="application/json")
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def getHalopurple(request):
+    line = PartyQuirk.objects.filter(timestamp__isnull=True)[random.randint(0, ColorEmotionPurple.objects.filter(timestamp__isnull=True).count() - 1)]
+    text = line.text
+    line.timestamp = datetime.datetime.now()
+    line.save()
+    data = {"text":text}
+    # WS send to request.GET["glassid"] glass and dashboard here
+    return HttpResponse(serialize(data), content_type="application/json")
+
+#### GET & CREATE COLORS END
 
 # lines in a hat
 
