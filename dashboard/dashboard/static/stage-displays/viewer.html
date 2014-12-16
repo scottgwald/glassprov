@@ -25,6 +25,94 @@
     <script type="text/javascript" src="jquery/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/underscore.js"></script>
 
+    <style>
+      html, body {
+        overflow: hidden;
+      }
+      #panes1 .box img{
+        padding-top: 16px;
+        border-radius: 1000px;
+        margin: 0 auto;
+        width: 60%;
+      }
+      #panes1 .box {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 33.3%;
+        text-align: center;
+      }
+      #panes1 .container.box {
+        margin: 0;
+      }
+      #q1.box {
+        left: 0;
+        /*right: 66%;*/
+      }
+      #q2.box {
+        left: 33.3%;
+        /*right: 33%;*/
+        /*width: 33.3%;*/
+      }
+      #q3.box {
+        left: 66.6%;
+        /*right: 0%;*/
+      }
+
+      
+      #panes2 .box{
+        background-position: top center;
+        background-size: contain;
+      }
+      #panes2 .box {
+        position: absolute;
+/*        top: 0;
+        bottom: 0;*/
+        width: 50%;
+        text-align: center;
+      }
+      #panes2 .container.box {
+        margin: 0;
+      }
+
+      #p1.box {
+        background-image: url('img/blue.gif');
+        left: 0;
+        right: 50%;
+        top: 0;
+        bottom: 50%;
+      }
+      #p2.box {
+        background-image: url('img/yellow.gif');
+        left: 50%;
+        right: 0%;
+        top: 0;
+        bottom: 50%;
+        /*right: 33%;*/
+        /*width: 33.3%;*/
+      }
+      #p3.box {
+        background-image: url('img/purple.gif');
+        left: 0;
+        right: 50%;
+        top: 50%;
+        bottom: 0%;
+      }
+      #p4.box {
+        background-image: url('img/redyellow.gif');
+        left: 50%;
+        right: 0%;
+        top: 50%;
+        bottom: 0%;
+        /*right: 33%;*/
+        /*width: 33.3%;*/
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+
     <script type="text/javascript">
 
         Date.prototype.today = function () {
@@ -220,6 +308,7 @@
     // Code to auto resize text to fit in box.
     ;(function($) {
       $.fn.textfill = function(options) {
+        debugger;
           var fontSize = options.maxFontPixels;
           var ourText = $('span:visible:first', this);
           var maxHeight = $(this).height();
@@ -239,9 +328,9 @@
       $('.q1').textfill({ maxFontPixels: 75 });
       $('.q2').textfill({ maxFontPixels: 75 });
       $('.q3').textfill({ maxFontPixels: 75 });
-      $('.q4').textfill({ maxFontPixels: 75 });
-      $('.q5').textfill({ maxFontPixels: 75 });
-      $('.q6').textfill({ maxFontPixels: 75 });
+      // $('.q4').textfill({ maxFontPixels: 75 });
+      // $('.q5').textfill({ maxFontPixels: 75 });
+      // $('.q6').textfill({ maxFontPixels: 75 });
     });
     
     </script>
@@ -284,8 +373,9 @@
   data-setup='{"autoplay": true, "example_option":true}'>
  <source src="videos/001.mp4" type='video/mp4' />
  </video> -->
-
-  <div id="q1" class="container q1" style="width:33%; height:50%; float:left">
+<span id="panes1" class="">
+  <div id="q1" class="container box q1">
+    <img src='img/ari-crop.jpg'>
     <div class="user"></div>
     <div class="audience-name"></div>
     <div class="text-container">
@@ -295,7 +385,8 @@
     </div>
   </div>
 
-  <div id="q2" class="container q2" style="width:33%; height:50%; float:left">
+  <div id="q2" class="container box q2">
+    <img src='img/woo1-crop.png'>
     <div class="user"></div>
     <div class="audience-name"></div>
     <div class="text-container">
@@ -305,7 +396,23 @@
     </div>
   </div>
 
-  <div id="q3" class="container q3" style="width:34%; height:50%; float:right">
+  <div id="q3" class="container box q3">
+    <img src='img/dave2-crop.jpg'>
+    <div class="user"></div>
+    <div class="audience-name"></div>
+    <div class="text-container">
+      <div class="text">
+        <span></span>
+      </div>
+    </div>
+  </div>
+</span>
+
+
+
+<span id="panes2" class="hidden">
+  <div id="p1" class="container box q1">
+    <!-- <img src='img/blue.gif'> -->
     <div class="user"></div>
     <div class="audience-name"></div>
     <div class="text-container">
@@ -315,7 +422,40 @@
     </div>
   </div>
 
-  <div id="q4" class="container q4" style="width:33%; height:50%; float:left">
+  <div id="p2" class="container box q2">
+    <!-- <img src='img/yellow.gif'> -->
+    <div class="user"></div>
+    <div class="audience-name"></div>
+    <div class="text-container">
+      <div class="text">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="p3" class="container box q3">
+    <!-- <img src='img/purple.gif'> -->
+    <div class="user"></div>
+    <div class="audience-name"></div>
+    <div class="text-container">
+      <div class="text">
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div id="p4" class="container box q3">
+    <!-- <img src='img/redyellow.gif'> -->
+    <div class="user"></div>
+    <div class="audience-name"></div>
+    <div class="text-container">
+      <div class="text">
+        <span></span>
+      </div>
+    </div>
+  </div>
+</span>
+  <!-- <div id="q4" class="container q4" style="width:33%; height:50%; float:left">
     <div class="user"></div>
     <div class="audience-name"></div>
     <div class="text-container">
@@ -343,7 +483,7 @@
         <span></span>
       </div>
     </div>
-  </div>
+  </div> -->
 <!--   <div id="q5" style="width:100%;height:100%;position:relative;z-index:100;float:right;" class="container q5">
     <div class="user">Test</div>
     <div class="audience-name">Test</div>
@@ -354,5 +494,21 @@
     </div>
 
   </div> -->
+  <script type="text/javascript">
+  function pane1on(){
+    var p1 = document.querySelector('#panes1');
+    var p2 = document.querySelector('#panes2');
+
+    p1.classList.remove('hidden');
+    p2.classList.add('hidden');
+  }
+  function pane2on(){
+    var p1 = document.querySelector('#panes1');
+    var p2 = document.querySelector('#panes2');
+
+    p2.classList.remove('hidden');
+    p1.classList.add('hidden');
+  }
+  </script>
   </body>
 </html>
